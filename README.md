@@ -4,6 +4,19 @@
 
 ---
 
+## 📲 Escaneie para Acessar no Celular
+
+<div align="center">
+  <img src="./qrcode.svg" width="260" alt="QR Code ConectaJá" />
+  <p>
+    <b>Aponte a câmera do seu celular para o QR Code acima</b><br>
+    ou acesse diretamente pelo link:<br>
+    <a href="https://delbelloerick-prog.github.io/ConectaJa/"><b>👉 https://delbelloerick-prog.github.io/ConectaJa/</b></a>
+  </p>
+</div>
+
+---
+
 ## ✨ Funcionalidades Principais
 
 ### 👤 Modo Cliente
@@ -42,6 +55,8 @@ ConectaJa/
 ├── manifest.webmanifest    # Manifesto de configuração PWA
 ├── manifest.json           # Compatibilidade com navegadores legados
 ├── sw.js                   # Service Worker (estratégia de cache e offline)
+├── qrcode.svg              # QR Code vetorial para acesso rápido
+├── qrcode.png              # QR Code em PNG
 ├── .nojekyll               # Configuração para GitHub Pages
 ├── .gitignore              # Arquivos ignorados pelo Git
 ├── js/
@@ -78,33 +93,3 @@ python -m http.server 8080
 ```
 
 Acesse em seu navegador: `http://localhost:8080`
-
----
-
-## 🌐 Como Publicar no GitHub e Ativar o GitHub Pages
-
-### Passo 1: Criar o Repositório no GitHub
-1. Acesse [github.com/new](https://github.com/new)
-2. Defina o nome do repositório como `ConectaJa` (ou outro nome de sua preferência).
-3. Deixe o repositório como **Público** (Public) e clique em **Create repository**.
-
-### Passo 2: Enviar os Arquivos via Terminal
-No terminal da pasta do projeto, execute:
-```bash
-git init
-git add .
-git commit -m "feat: transforma ConectaJá em PWA completo e offline"
-git branch -M main
-git remote add origin https://github.com/<SEU_USUARIO>/ConectaJa.git
-git push -u origin main
-```
-
-### Passo 3: Ativar o GitHub Pages (Grátis)
-1. No seu repositório no GitHub, clique na aba **Settings** (Configurações).
-2. No menu lateral esquerdo, selecione **Pages**.
-3. Em **Build and deployment > Source**, selecione **Deploy from a branch**.
-4. Em **Branch**, escolha `main` e a pasta `/(root)`, depois clique em **Save**.
-5. Aguarde cerca de 1 minuto: o GitHub fornecerá a URL pública do seu PWA:
-   👉 `https://<SEU_USUARIO>.github.io/ConectaJa/`
-
-Agora seu aplicativo estará online, público e pronto para ser instalado por qualquer cliente ou profissional!
