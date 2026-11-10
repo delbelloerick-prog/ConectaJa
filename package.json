@@ -1,0 +1,12 @@
+{
+  "name": "conectaja",
+  "version": "1.0.0",
+  "description": "ConectaJá - PWA Marketplace de Serviços de Tupã (SP)",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "keywords": ["pwa", "marketplace", "servicos", "tupa"],
+  "author": "",
+  "license": "MIT"
+}
