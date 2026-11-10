@@ -376,8 +376,18 @@ button:focus-visible,input:focus-visible{outline:3px solid #F59E0B;outline-offse
 .row{display:flex;align-items:center;gap:12px}
 .av{width:46px;height:46px;border-radius:23px;background:linear-gradient(135deg,#115E59,#0D9488);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none}
 @keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes splashIn{from{opacity:0;transform:scale(0.85)}to{opacity:1;transform:scale(1)}}
+@keyframes splashFade{from{opacity:0.4}to{opacity:1}}
 </style>
 </helmet>
+
+<sc-if value="{{s_splash}}" hint-placeholder-val="{{ true }}">
+<div sc-camel-on-click="{{irLogin}}" style="position:absolute;top:0;left:0;right:0;bottom:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,#0a1628 0%,#0f1f3a 40%,#142744 100%);cursor:pointer;overflow:hidden">
+<img src="./splash.jpg" alt="ConectaJá" style="width:85%;max-width:360px;border-radius:24px;object-fit:contain;box-shadow:0 20px 60px rgba(0,0,0,0.5);animation:splashIn 0.8s ease-out">
+<div style="margin-top:32px;color:rgba(255,255,255,0.6);font-size:14px;font-weight:500;letter-spacing:0.5px;animation:splashFade 1.5s ease-in-out infinite alternate">Toque para entrar</div>
+</div>
+</sc-if>
+
 <div style="box-sizing:border-box;display:flex;flex-direction:column;background:#EFF7F5;color:#0F2A27;overflow:hidden;position:relative" class="pwa-app-container" data-canvas-width="390" data-canvas-height="844" data-document-role="page" data-label="App clicável (cliente e profissional)">
 
 <div style="background:linear-gradient(135deg,#0F4F4B,#0D9488);color:#fff;padding:16px 20px 20px;border-radius:0 0 26px 26px;display:flex;flex-direction:column;gap:12px">
@@ -893,7 +903,7 @@ button:focus-visible,input:focus-visible{outline:3px solid #F59E0B;outline-offse
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { screen:'login', role:'cliente', cat:'Reformas e construção', para:null, selNome:null, sort:'todos', q:'', pedidos:[], ativo:null, nota:0, chat:[], chatNome:'', ajuda:false,
+    this.state = { screen:'splash', role:'cliente', cat:'Reformas e construção', para:null, selNome:null, sort:'todos', q:'', pedidos:[], ativo:null, nota:0, chat:[], chatNome:'', ajuda:false,
       amsgs:[{ de:'bot', t:'Oi! Sou o assistente do ConectaJa. Toque em uma pergunta ou escreva sua dúvida.' }], atxt:'', ctxt:'', typing:false, atyp:false, toast:'', aceite:false, onb:0, visto:false, novo:false, favs:{}, cats:{}, bairros:{}, raio:5, faixa:'', infoKey:'sobre', offline:false, grande:false, avCli:0, respondido:false, avisos:{}, notifs:[], unread:0, extrato:[{ t:'Bônus de boas-vindas', v:'+10' }], fotos:0, denunc:{}, admAn:3, admDen:2, admRe:1, assunto:'Pagamento', protocolo:'', creditos:10, abertos:{}, env:{}, pix:null, pixMsg:'',
       etapas:{ doc:false, selfie:false, cats:false, bairros:false }, cadastro:'rascunho', seq:1 };
   }
@@ -1168,7 +1178,7 @@ Fretes e mudanças;Sérgio Matos;Carreto;Eletrodomésticos|Material de construç
       regras: { t:'Regras do app', b:[{ h:'Garantia', p:'O pagamento fica retido até você confirmar o serviço. Se der problema, toque em Relatar problema: a equipe responde em até 24 h e refaz o serviço ou devolve o valor.' }, { h:'Créditos do prestador', p:'Valem por 12 meses. Voltam automaticamente se o cliente não responder em 48 h, ou em pedido falso, de teste, duplicado ou já fechado.' }, { h:'Cancelamento', p:'Grátis até 24 h antes. Depois, só com taxa combinada antes do aceite.' }, { h:'Avaliações', p:'Só quem contratou pode avaliar. A equipe modera avaliações abusivas.' }, { h:'Denúncias', p:'Você pode denunciar perfis e pedidos. A equipe analisa e pode suspender contas.' }] },
       sobre: { t:'Sobre o ConectaJa', b:[{ h:'O que é', p:'Um aplicativo de serviços feito para Tupã e região, com profissionais verificados em várias categorias.' }, { h:'Como funciona', p:'O cliente pede um orçamento grátis, recebe até 3 propostas, combina, paga com segurança e avalia.' }, { h:'Como o app ganha dinheiro', p:'O prestador compra créditos para liberar o contato dos pedidos. Para o cliente, o app é grátis.' }, { h:'Segurança', p:'Verificação de documento e selfie, avaliações de quem contratou, denúncia, garantia e suporte humano.' }, { h:'Versão', p:'Protótipo de demonstração. Nomes, preços e pagamentos são simulados.' }] }
     };
-    const titulos = { login:'Bem-vindo ao ConectaJa', home:'Olá! O que você precisa hoje?', lista:catAtual, perfil:'Perfil do profissional', pedido:'Novo pedido', meus:'Meus pedidos', orc:'Orçamentos recebidos', chat: st.chatNome || 'Conversa', aval:'Avaliar serviço', notif:'Notificações', suporte:'Suporte', adm:'Painel da equipe', onb:'Bem-vindo', codigo:'Confirme seu número', menu:'Menu', info:(infoMap[st.infoKey] || infoMap.sobre).t, favs:'Favoritos', recibos:'Recibos e pagamentos', indique:'Indique e ganhe', phome:'Pedidos para você', pcred:'Meus créditos', pperfil:'Meu perfil de prestador' };
+    const titulos = { splash:'', login:'Bem-vindo ao ConectaJa', home:'Olá! O que você precisa hoje?', lista:catAtual, perfil:'Perfil do profissional', pedido:'Novo pedido', meus:'Meus pedidos', orc:'Orçamentos recebidos', chat: st.chatNome || 'Conversa', aval:'Avaliar serviço', notif:'Notificações', suporte:'Suporte', adm:'Painel da equipe', onb:'Bem-vindo', codigo:'Confirme seu número', menu:'Menu', info:(infoMap[st.infoKey] || infoMap.sobre).t, favs:'Favoritos', recibos:'Recibos e pagamentos', indique:'Indique e ganhe', phome:'Pedidos para você', pcred:'Meus créditos', pperfil:'Meu perfil de prestador' };
     const backMap = { lista:'home', perfil:'lista', pedido:'lista', orc:'meus', chat: st.chatBack || 'meus', aval:'meus', notif: pres ? 'phome' : 'home', suporte: pres ? 'phome' : 'home', adm:'login', info:'menu', favs:'menu', recibos:'menu', indique:'menu', menu: pres ? 'phome' : 'home', codigo:'login' };
     const pergCli = ['Como funciona a garantia?','Como funciona o app?','Como peço um serviço?','Quanto custa para o cliente?','O profissional é confiável?','Como avalio um serviço?','Como denuncio um perfil?'];
     const pergPre = ['Como libero um contato?','O que são créditos?','Como me verifico?','O crédito pode voltar?','Como envio orçamento?'];
@@ -1208,7 +1218,7 @@ Fretes e mudanças;Sérgio Matos;Carreto;Eletrodomésticos|Material de construç
       admAprova: () => st.admAn > 0 ? (this.flash('Prestador aprovado.'), this.setState({ admAn: st.admAn - 1 })) : null,
       admResolve: () => st.admDen > 0 ? (this.flash('Denúncia resolvida.'), this.setState({ admDen: st.admDen - 1 })) : null,
       admReemb: () => st.admRe > 0 ? (this.flash('Reembolso aprovado.'), this.setState({ admRe: st.admRe - 1 })) : null,
-      irAdm: set({ screen:'adm' }), irSuporte: set({ ajuda:false, screen:'suporte' }),
+      irAdm: set({ screen:'adm' }), irSuporte: set({ ajuda:false, screen:'suporte' }), irLogin: set({ screen:'login' }),
       togAceite: set({ aceite: !st.aceite }), aceiteAria: st.aceite ? 'true' : 'false', aceiteBg: st.aceite ? '#115E59' : '#fff', aceiteMarca: st.aceite ? '✓' : '',
       addFoto: () => this.setState({ fotos: Math.min(4, (st.fotos || 0) + 1) }), fotosTxt: (st.fotos || 0) + '/4',
       denunciar: () => { this.flash('Denúncia enviada para a equipe analisar.'); this.setState({ admDen: (st.admDen || 0) + 1 }); },
@@ -1232,8 +1242,8 @@ Fretes e mudanças;Sérgio Matos;Carreto;Eletrodomésticos|Material de construç
       respondido: st.respondido, naoRespondido: !st.respondido, responder: () => { this.flash('Resposta enviada ao cliente.'); this.setState({ respondido:true }); }
     };
     return {
-      titulo: titulos[sc], showBack: !!backMap[sc], voltar: set({ screen: backMap[sc] || 'home' }), showNav: !['login','adm','onb','codigo'].includes(sc), fabBottom: ['login','adm','onb','codigo'].includes(sc) ? '20px' : '84px',
-      s_login: sc === 'login', s_home: sc === 'home', s_lista: sc === 'lista', s_perfil: sc === 'perfil', s_pedido: sc === 'pedido', s_meus: sc === 'meus', s_orc: sc === 'orc', s_chat: sc === 'chat', s_aval: sc === 'aval', s_phome: sc === 'phome', s_pcred: sc === 'pcred', s_pperfil: sc === 'pperfil',
+      titulo: titulos[sc], showBack: !!backMap[sc], voltar: set({ screen: backMap[sc] || 'home' }), showNav: !['splash','login','adm','onb','codigo'].includes(sc), fabBottom: ['splash','login','adm','onb','codigo'].includes(sc) ? '20px' : '84px',
+      s_splash: sc === 'splash', s_login: sc === 'login', s_home: sc === 'home', s_lista: sc === 'lista', s_perfil: sc === 'perfil', s_pedido: sc === 'pedido', s_meus: sc === 'meus', s_orc: sc === 'orc', s_chat: sc === 'chat', s_aval: sc === 'aval', s_phome: sc === 'phome', s_pcred: sc === 'pcred', s_pperfil: sc === 'pperfil',
       ...extras,
       roles, roleNome: pres ? 'prestador' : 'cliente', roleDica: pres ? 'Cadastro com verificação de documento. Primeiros meses grátis.' : 'Pedir orçamento é grátis para o cliente.',
       entrar: () => st.aceite ? this.setState({ screen:'codigo', novo:false, notifs:[], unread:0 }) : this.flash('Marque o aceite dos termos para continuar.'), criar: () => st.aceite ? this.setState({ screen:'codigo', novo:true, notifs:[], unread:0 }) : this.flash('Marque o aceite dos termos para continuar.'),
