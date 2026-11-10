@@ -1,5 +1,5 @@
 // ConectaJá PWA Service Worker
-const CACHE_NAME = 'conectaja-cache-v2';
+const CACHE_NAME = 'conectaja-cache-v3';
 
 const ASSETS_TO_CACHE = [
   './',
