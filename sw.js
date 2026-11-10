@@ -1,5 +1,5 @@
 // ConectaJá PWA Service Worker
-const CACHE_NAME = 'conectaja-cache-v1';
+const CACHE_NAME = 'conectaja-cache-v2';
 
 const ASSETS_TO_CACHE = [
   './',
@@ -15,7 +15,8 @@ const ASSETS_TO_CACHE = [
   './icons/icon-512.png',
   './icons/icon-maskable-192.png',
   './icons/icon-maskable-512.png',
-  './icons/apple-touch-icon.png'
+  './icons/apple-touch-icon.png',
+  './splash.jpg'
 ];
 
 // Install: Cache core application assets
