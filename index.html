@@ -42,7 +42,7 @@
       min-height: 100dvh;
       background: #091a18;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      overflow: hidden;
+      overflow-x: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -60,37 +60,54 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      position: relative;
     }
     .pwa-app-container {
       width: 100%;
-      max-width: 440px;
+      max-width: 480px;
       height: 100vh;
       height: 100dvh;
-      max-height: 920px;
+      max-height: 940px;
       margin: 0 auto;
       border-radius: 0;
       box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
       position: relative;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
     }
-    @media (min-width: 441px) and (min-height: 700px) {
+    @media (min-width: 601px) and (min-height: 600px) {
+      body {
+        background: radial-gradient(circle at top, #133a36 0%, #081716 100%);
+      }
       .pwa-app-container {
         border-radius: 28px;
-        height: min(880px, 96vh);
+        height: min(900px, 94vh);
         overflow: hidden;
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.06);
       }
     }
-    @media (max-width: 440px) {
+    @media (max-width: 600px) {
       body {
         background: #EFF7F5;
       }
       .pwa-app-container {
         max-width: 100% !important;
+        width: 100% !important;
         height: 100vh !important;
         height: 100dvh !important;
+        max-height: 100% !important;
         box-shadow: none !important;
         border-radius: 0 !important;
         border: none !important;
+      }
+    }
+    @media (max-height: 560px) {
+      .pwa-app-container {
+        height: 100% !important;
+        max-height: 100% !important;
+        border-radius: 0 !important;
       }
     }
   </style>
@@ -382,9 +399,18 @@ button:focus-visible,input:focus-visible{outline:3px solid #F59E0B;outline-offse
 </helmet>
 
 <sc-if value="{{s_splash}}" hint-placeholder-val="{{ true }}">
-<div sc-camel-on-click="{{irLogin}}" style="position:absolute;top:0;left:0;right:0;bottom:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,#0a1628 0%,#0f1f3a 40%,#142744 100%);cursor:pointer;overflow:hidden">
-<img src="./splash.jpg" alt="ConectaJá" style="width:85%;max-width:360px;border-radius:24px;object-fit:contain;box-shadow:0 20px 60px rgba(0,0,0,0.5);animation:splashIn 0.8s ease-out">
-<div style="margin-top:32px;color:rgba(255,255,255,0.6);font-size:14px;font-weight:500;letter-spacing:0.5px;animation:splashFade 1.5s ease-in-out infinite alternate">Toque para entrar</div>
+<div sc-camel-on-click="{{irLogin}}" style="position:fixed;top:0;left:0;right:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at center,#0f2a4a 0%,#081729 65%,#040d18 100%);cursor:pointer;overflow-y:auto;padding:20px;box-sizing:border-box">
+<div style="width:100%;max-width:380px;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:auto">
+<div style="width:100%;max-width:min(86vw,340px);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;margin-bottom:24px">
+<img src="./splash.jpg" alt="ConectaJá" style="width:100%;height:100%;max-height:min(48vh,340px);object-fit:contain;border-radius:26px;box-shadow:0 24px 60px rgba(0,0,0,0.65),0 0 0 1px rgba(255,255,255,0.08);animation:splashIn 0.7s cubic-bezier(0.16,1,0.3,1)">
+</div>
+<button class="btn" sc-camel-on-click="{{irLogin}}" style="width:100%;max-width:320px;min-height:52px;font-size:16px;font-weight:700;border-radius:16px;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 10px 28px rgba(245,158,11,0.4);border:none;cursor:pointer">
+<span>Acessar ConectaJá</span>
+<svg width="20" height="20" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+</button>
+<div style="margin-top:16px;color:rgba(255,255,255,0.6);font-size:13.5px;font-weight:500;letter-spacing:0.3px;animation:splashFade 1.6s ease-in-out infinite alternate">Toque para entrar</div>
+<div style="margin-top:22px;font-size:11.5px;color:rgba(255,255,255,0.35);font-weight:600;letter-spacing:0.5px;text-transform:uppercase">Tupã e região • Versão PWA</div>
+</div>
 </div>
 </sc-if>
 
@@ -418,6 +444,10 @@ button:focus-visible,input:focus-visible{outline:3px solid #F59E0B;outline-offse
 <div style="flex:1;overflow:auto;padding:16px 20px 12px;display:flex;flex-direction:column;gap:14px;zoom:{{zoomV}}">
 
 <sc-if value="{{s_login}}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;align-items:center;text-align:center;padding:4px 0 8px">
+<img src="./splash.jpg" alt="ConectaJá" style="width:104px;height:104px;border-radius:22px;object-fit:cover;box-shadow:0 8px 24px rgba(17,94,89,0.18);margin-bottom:8px">
+<div style="font-size:12px;font-weight:700;color:#115E59;text-transform:uppercase;letter-spacing:0.8px">Serviços na Palma da Sua Mão</div>
+</div>
 <div class="mut" style="font-size:14px">Conectamos quem precisa de um serviço com quem sabe fazer, aqui em Tupã.</div>
 <div class="h">Como você quer entrar?</div>
 <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px">
