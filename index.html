@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>ConectaJá - Serviços em Tupã</title>
+
+  <!-- PWA & SEO Meta Tags -->
+  <meta name="description" content="ConectaJá: O marketplace de serviços de Tupã (SP). Encontre pedreiros, diaristas, pintores, técnicos e mais com avaliações reais e orçamentos grátis.">
+  <meta name="theme-color" content="#0F4F4B">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="ConectaJá">
+  <meta name="application-name" content="ConectaJá">
+  <meta name="msapplication-TileColor" content="#0F4F4B">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="ConectaJá - Marketplace de Serviços de Tupã">
+  <meta property="og:description" content="Conectando clientes e profissionais autônomos em Tupã (SP) com segurança e rapidez.">
+  <meta property="og:image" content="./icons/icon-512.png">
+
+  <!-- PWA Manifest & Icons -->
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="./icons/favicon.svg">
+  <link rel="alternate icon" type="image/png" href="./icons/icon-192.png">
+  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+
+  <!-- Responsive & PWA Styles -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    html, body {
+      width: 100%;
+      height: 100%;
+      min-height: 100vh;
+      min-height: 100dvh;
+      background: #091a18;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #dc-root {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #dc-root > .sc-host {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .pwa-app-container {
+      width: 100%;
+      max-width: 440px;
+      height: 100vh;
+      height: 100dvh;
+      max-height: 920px;
+      margin: 0 auto;
+      border-radius: 0;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+      position: relative;
+    }
+    @media (min-width: 441px) and (min-height: 700px) {
+      .pwa-app-container {
+        border-radius: 28px;
+        height: min(880px, 96vh);
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+    }
+    @media (max-width: 440px) {
+      body {
+        background: #EFF7F5;
+      }
+      .pwa-app-container {
+        max-width: 100% !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        border: none !important;
+      }
+    }
+  </style>
+
+  <!-- React 18 & ReactDOM -->
+  <script src="./js/react.production.min.js"></script>
+  <script src="./js/react-dom.production.min.js"></script>
+
+  <!-- DC Runtime -->
+  <script src="./js/dc-runtime.js"></script>
+</head>
+<body>
+  <x-dc>
+<helmet>
+<style>/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7W0Q5n-wU.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa0ZL7W0Q5n-wU.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2ZL7W0Q5n-wU.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1pL7W0Q5n-wU.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2pL7W0Q5n-wU.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7W0Q5n-wU.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("./fonts/inter.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7W0Q5n-wU.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa0ZL7W0Q5n-wU.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2ZL7W0Q5n-wU.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1pL7W0Q5n-wU.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2pL7W0Q5n-wU.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7W0Q5n-wU.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("./fonts/inter.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7W0Q5n-wU.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa0ZL7W0Q5n-wU.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2ZL7W0Q5n-wU.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1pL7W0Q5n-wU.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2pL7W0Q5n-wU.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7W0Q5n-wU.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("./fonts/inter.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7W0Q5n-wU.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa0ZL7W0Q5n-wU.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2ZL7W0Q5n-wU.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1pL7W0Q5n-wU.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2pL7W0Q5n-wU.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7W0Q5n-wU.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("./fonts/inter.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<style>
+body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+button{font-family:inherit;cursor:pointer;border:0}
+button:focus-visible,input:focus-visible{outline:3px solid #F59E0B;outline-offset:2px}
+.card{background:#fff;border:1px solid #D5E8E4;border-radius:18px;padding:14px;box-shadow:0 2px 8px rgba(17,94,89,.07);animation:pop .28s ease both}
+.btn{background:#F59E0B;color:#1F2937;font-weight:700;font-size:15px;border-radius:14px;min-height:48px;padding:0 16px;transition:transform .12s}
+.btn:active,.btn2:active,.tile:active{transform:scale(.97)}
+.btn2{background:#fff;color:#115E59;border:1.5px solid #115E59!important;font-weight:700;font-size:13px;border-radius:12px;min-height:44px;padding:0 12px;transition:transform .12s}
+.tile{transition:transform .15s,box-shadow .15s}.tile:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(17,94,89,.14)}
+.chip{background:#CCFBF1;color:#115E59;font-size:12px;font-weight:600;border-radius:999px;padding:6px 10px}
+.chipb{background:#fff;color:#115E59;border:1.5px solid #99D8CF!important;font-size:12.5px;font-weight:600;border-radius:999px;padding:0 12px;min-height:36px}
+.lbl{font-size:12px;color:#456461;font-weight:600}
+.mut{font-size:12.5px;color:#456461}
+.in{border:1px solid #B5D3CE;border-radius:12px;padding:0 12px;min-height:46px;font:inherit;font-size:14px;background:#fff;color:#0F2A27;box-sizing:border-box;width:100%}
+.h{font-size:15px;font-weight:700}
+.row{display:flex;align-items:center;gap:12px}
+.av{width:46px;height:46px;border-radius:23px;background:linear-gradient(135deg,#115E59,#0D9488);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+</style>
+</helmet>
+<div style="box-sizing:border-box;display:flex;flex-direction:column;background:#EFF7F5;color:#0F2A27;overflow:hidden;position:relative" class="pwa-app-container" data-canvas-width="390" data-canvas-height="844" data-document-role="page" data-label="App clicável (cliente e profissional)">
+
+<div style="background:linear-gradient(135deg,#0F4F4B,#0D9488);color:#fff;padding:16px 20px 20px;border-radius:0 0 26px 26px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;align-items:center;justify-content:space-between">
+<div style="display:flex;align-items:center;gap:10px">
+<sc-if value="{{showBack}}" hint-placeholder-val="{{ false }}">
+<button sc-camel-on-click="{{voltar}}" aria-label="Voltar" style="width:36px;height:36px;border-radius:12px;background:rgba(255,255,255,.18);color:#fff;display:flex;align-items:center;justify-content:center">
+<svg width="20" height="20" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg></button>
+</sc-if>
+<span style="width:34px;height:34px;border-radius:11px;background:#F59E0B;color:#0F2A27;display:flex;align-items:center;justify-content:center">
+<svg width="20" height="20" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg></span>
+<span style="font-weight:700;font-size:18px;letter-spacing:-.3px">ConectaJa</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px">
+<sc-if value="{{showNav}}" hint-placeholder-val="{{ true }}">
+<button sc-camel-on-click="{{abrirNotif}}" aria-label="Notificações" style="position:relative;width:36px;height:36px;border-radius:12px;background:rgba(255,255,255,.18);color:#fff;display:flex;align-items:center;justify-content:center">
+<svg width="19" height="19" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0"></path></svg>
+<sc-if value="{{temUnread}}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:-4px;right:-4px;min-width:18px;height:18px;border-radius:9px;background:#F59E0B;color:#0F2A27;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center">{{unread}}</span></sc-if>
+</button>
+</sc-if>
+<span style="font-size:12px;font-weight:600;background:rgba(255,255,255,.16);padding:6px 10px;border-radius:999px">Tupã, SP</span>
+</div>
+</div>
+<div style="font-size:21px;font-weight:700;letter-spacing:-.4px;line-height:1.2">{{titulo}}</div>
+</div>
+
+<sc-if value="{{offline}}" hint-placeholder-val="{{ false }}"><div role="status" style="background:#B42318;color:#fff;text-align:center;font-size:12.5px;font-weight:600;padding:8px 12px">Sem conexão. Suas ações serão enviadas quando a internet voltar.</div></sc-if>
+<div style="flex:1;overflow:auto;padding:16px 20px 12px;display:flex;flex-direction:column;gap:14px;zoom:{{zoomV}}">
+
+<sc-if value="{{s_login}}" hint-placeholder-val="{{ true }}">
+<div class="mut" style="font-size:14px">Conectamos quem precisa de um serviço com quem sabe fazer, aqui em Tupã.</div>
+<div class="h">Como você quer entrar?</div>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px">
+<sc-for list="{{roles}}" as="r" hint-placeholder-count="2">
+<button class="tile" sc-camel-on-click="{{r.pick}}" style="background:{{r.bg}};border:2px solid {{r.borda}};border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:8px;align-items:flex-start;text-align:left;min-height:132px">
+<span style="width:42px;height:42px;border-radius:13px;background:#115E59;color:#fff;display:flex;align-items:center;justify-content:center">
+<svg width="22" height="22" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{r.d}}"></path></svg></span>
+<span style="font-weight:700;font-size:16px;color:#0F2A27">{{r.nome}}</span>
+<span class="mut" style="line-height:1.3">{{r.sub}}</span>
+<span style="font-size:11.5px;font-weight:700;color:#115E59">{{r.marca}}</span>
+</button>
+</sc-for>
+</div>
+<div class="card" style="display:flex;flex-direction:column;gap:8px">
+<label for="cel" class="lbl">Celular</label>
+<input id="cel" class="in" value="(14) 99999-0000">
+<label for="sen" class="lbl" style="margin-top:4px">Senha</label>
+<input id="sen" class="in" type="password" value="12345678">
+</div>
+<button sc-camel-on-click="{{togAceite}}" role="checkbox" aria-checked="{{aceiteAria}}" style="background:transparent;display:flex;gap:10px;align-items:flex-start;text-align:left;color:#0F2A27;font-size:12.5px;line-height:1.4;padding:0">
+<span style="width:22px;height:22px;border-radius:7px;border:2px solid #115E59;background:{{aceiteBg}};color:#fff;display:flex;align-items:center;justify-content:center;flex:none;font-weight:700">{{aceiteMarca}}</span>
+<span>Li e aceito os Termos de uso e a Política de Privacidade (LGPD). Meu contato só é liberado para até 3 profissionais.</span></button>
+<button class="btn" sc-camel-on-click="{{entrar}}">Entrar como {{roleNome}}</button>
+<button sc-camel-on-click="{{criar}}" style="background:transparent;color:#115E59;font-weight:700;font-size:14px;border-radius:14px;min-height:44px">Criar conta grátis</button>
+<button sc-camel-on-click="{{esqueci}}" style="background:transparent;color:#456461;font-size:13px;min-height:36px">Esqueci minha senha</button>
+<div class="mut" style="text-align:center">{{roleDica}}</div>
+<button sc-camel-on-click="{{irAdm}}" style="background:transparent;color:#456461;font-size:12px;min-height:36px;text-decoration:underline">Painel da equipe (demonstração)</button>
+</sc-if>
+
+<sc-if value="{{s_home}}" hint-placeholder-val="{{ false }}">
+<div style="background:#fff;border:1px solid #B5D3CE;border-radius:14px;padding:0 14px;display:flex;align-items:center;gap:10px;min-height:48px;color:#456461">
+<svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+<input id="buscainp" aria-label="Buscar serviço ou profissional" placeholder="Buscar serviço ou profissional" value="{{buscaTxt}}" sc-camel-on-input="{{onBusca}}" style="border:0;outline:0;flex:1;font:inherit;font-size:14px;background:transparent;color:#0F2A27">
+</div>
+<sc-if value="{{buscando}}" hint-placeholder-val="{{ false }}">
+<div class="h">Resultados ({{nRes}})</div>
+<sc-if value="{{semRes}}" hint-placeholder-val="{{ false }}"><div class="card mut">Nenhum profissional encontrado. Tente outra palavra.</div></sc-if>
+<sc-for list="{{res}}" as="p" hint-placeholder-count="2">
+<button class="card tile" sc-camel-on-click="{{p.ver}}" style="display:flex;gap:12px;align-items:center;text-align:left">
+<span class="av">{{p.ini}}</span>
+<span style="flex:1;display:flex;flex-direction:column;gap:2px"><b style="font-size:14.5px;color:#0F2A27">{{p.nome}}</b><span class="mut">{{p.oficio}} · {{p.cat}}</span></span>
+<b style="color:#115E59">{{p.nota}}</b>
+</button>
+</sc-for>
+</sc-if>
+<div class="h">Categorias</div>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px">
+<sc-for list="{{cats}}" as="c" hint-placeholder-count="4">
+<button class="card tile" sc-camel-on-click="{{c.pick}}" style="display:flex;align-items:center;gap:12px;text-align:left;min-height:68px">
+<span style="width:40px;height:40px;border-radius:12px;background:#CCFBF1;color:#115E59;display:flex;align-items:center;justify-content:center;flex:none">
+<svg width="22" height="22" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{c.d}}"></path></svg></span>
+<span style="font-size:13.5px;font-weight:600;color:#0F2A27;line-height:1.25">{{c.nome}}</span>
+</button>
+</sc-for>
+</div>
+<div class="card" style="background:#FFF7E0;border-color:#F6D98A;display:flex;flex-direction:column;gap:6px">
+<div class="h" style="color:#5A3B00">Como funciona</div>
+<div style="font-size:13px;color:#5A3B00;line-height:1.5">1. Escolha a categoria e peça um orçamento grátis. 2. Receba propostas de até 3 profissionais. 3. Combine, contrate e avalie.</div>
+</div>
+</sc-if>
+
+<sc-if value="{{s_lista}}" hint-placeholder-val="{{ false }}">
+<div class="mut">{{listaTxt}}</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<sc-for list="{{filtros}}" as="f" hint-placeholder-count="3">
+<button sc-camel-on-click="{{f.pick}}" style="background:{{f.bg}};color:{{f.cor}};border:1.5px solid #115E59!important;font-size:12.5px;font-weight:700;border-radius:999px;padding:0 14px;min-height:36px">{{f.t}}</button>
+</sc-for>
+</div>
+<sc-if value="{{semProf}}" hint-placeholder-val="{{ false }}">
+<div class="card" style="display:flex;flex-direction:column;gap:10px;text-align:center;padding:22px 16px">
+<b>Ainda não temos profissionais nesta categoria</b>
+<div class="mut">Estamos cadastrando prestadores de Tupã. Quer ser avisado quando chegarem?</div>
+<button class="btn" sc-camel-on-click="{{avisar}}">{{avisarTxt}}</button>
+</div>
+</sc-if>
+<sc-for list="{{lista}}" as="p" hint-placeholder-count="3">
+<div class="card" style="display:flex;flex-direction:column;gap:10px">
+<div class="row">
+<span class="av" style="width:50px;height:50px;border-radius:25px">{{p.ini}}</span>
+<span style="flex:1;display:flex;flex-direction:column;gap:2px">
+<b style="font-size:15px">{{p.nome}}</b>
+<span style="font-size:13px;color:#115E59;font-weight:600">{{p.oficio}}</span>
+<span class="mut">Nota {{p.nota}} · {{p.aval}} avaliações · {{p.bairro}} · {{p.dist}}</span>
+</span>
+</div>
+<div class="lbl" style="text-transform:uppercase;letter-spacing:.5px;font-size:11.5px">O que oferece</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px">
+<sc-for list="{{p.servicos}}" as="sv" hint-placeholder-count="3"><span class="chip">{{sv.t}}</span></sc-for>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
+<span class="mut">a partir de <b style="font-size:16px;color:#0F2A27">{{p.preco}}</b></span>
+<span style="display:flex;gap:8px">
+<button class="btn2" aria-label="{{p.favTxt}}" sc-camel-on-click="{{p.favGo}}" style="padding:0 10px;min-width:44px"><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="{{p.favFill}}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"></path></svg></button>
+<button class="btn2" sc-camel-on-click="{{p.ver}}">Ver perfil</button>
+<button class="btn" style="font-size:13px;min-height:44px;padding:0 12px" sc-camel-on-click="{{p.pedir}}">Pedir orçamento</button>
+</span>
+</div>
+</div>
+</sc-for>
+</sc-if>
+
+<sc-if value="{{s_perfil}}" hint-placeholder-val="{{ false }}">
+<div class="card" style="display:flex;flex-direction:column;gap:6px;align-items:center;text-align:center;padding:20px 16px">
+<span class="av" style="width:70px;height:70px;border-radius:35px;font-size:24px">{{sel.ini}}</span>
+<div style="font-size:19px;font-weight:700;margin-top:4px">{{sel.nome}}</div>
+<div class="mut" style="font-size:13.5px">{{sel.oficio}} · {{sel.bairro}} · {{sel.dist}}</div>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;width:100%;margin-top:8px">
+<div style="background:#EFF7F5;border-radius:12px;padding:10px 4px"><b style="font-size:16px">{{sel.nota}}</b><div class="mut" style="font-size:11px">Nota</div></div>
+<div style="background:#EFF7F5;border-radius:12px;padding:10px 4px"><b style="font-size:16px">{{sel.aval}}</b><div class="mut" style="font-size:11px">Avaliações</div></div>
+<div style="background:#EFF7F5;border-radius:12px;padding:10px 4px"><b style="font-size:16px">{{sel.preco}}</b><div class="mut" style="font-size:11px">A partir de</div></div>
+</div>
+<div class="lbl" style="text-transform:uppercase;letter-spacing:.5px;font-size:11.5px;margin-top:8px">O que oferece</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center">
+<sc-for list="{{sel.servicos}}" as="sv" hint-placeholder-count="3"><span class="chip">{{sv.t}}</span></sc-for>
+</div>
+<div class="chip" style="margin-top:8px;background:#DCFCE7;color:#166534">Documento e selfie verificados</div>
+</div>
+<div class="card" style="display:flex;flex-direction:column;gap:8px">
+<div class="h">Avaliações de clientes</div>
+<div style="font-size:13px;line-height:1.45">Serviço no prazo e bem feito. <span class="mut">[exemplo]</span></div>
+<div style="font-size:13px;line-height:1.45">Atendimento educado e preço justo. <span class="mut">[exemplo]</span></div>
+</div>
+<div class="card" style="display:flex;flex-direction:column;gap:8px"><div class="h">Portfólio</div>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
+<div style="aspect-ratio:1;border-radius:12px;background:linear-gradient(135deg,#99D8CF,#0D9488);display:flex;align-items:flex-end;padding:6px;color:#fff;font-size:11px;font-weight:600">Foto 1</div>
+<div style="aspect-ratio:1;border-radius:12px;background:linear-gradient(135deg,#F6D98A,#D97706);display:flex;align-items:flex-end;padding:6px;color:#fff;font-size:11px;font-weight:600">Foto 2</div>
+<div style="aspect-ratio:1;border-radius:12px;background:linear-gradient(135deg,#A5B4FC,#4F46E5);display:flex;align-items:flex-end;padding:6px;color:#fff;font-size:11px;font-weight:600">Foto 3</div>
+</div><div class="mut">Fotos de exemplo de trabalhos anteriores.</div></div>
+<button class="btn" sc-camel-on-click="{{selPedir}}">Pedir orçamento</button>
+<button class="btn2" sc-camel-on-click="{{selChat}}">Conversar</button>
+<button class="btn2" sc-camel-on-click="{{selFav}}">{{selFavTxt}}</button>
+<button sc-camel-on-click="{{denunciar}}" style="background:transparent;color:#B42318;font-weight:700;font-size:13px;min-height:40px">Denunciar este perfil</button>
+</sc-if>
+
+<sc-if value="{{s_pedido}}" hint-placeholder-val="{{ false }}">
+<div class="card" style="display:flex;flex-direction:column;gap:8px">
+<div class="lbl">CATEGORIA</div>
+<b style="color:#115E59;font-size:16px">{{catAtual}}</b>
+<div class="mut">{{paraTxt}}</div>
+<label for="d" class="lbl" style="margin-top:6px">Descreva o serviço</label>
+<textarea id="d" rows="3" class="in" style="padding:12px;resize:none">Preciso de ajuda com este serviço em casa.</textarea>
+<label for="b" class="lbl" style="margin-top:4px">Bairro</label>
+<input id="b" class="in" value="Centro">
+<label for="u" class="lbl" style="margin-top:4px">Quando você precisa?</label>
+<input id="u" class="in" value="Esta semana">
+</div>
+<button class="btn2" style="min-height:48px" sc-camel-on-click="{{addFoto}}">Adicionar fotos do serviço ({{fotosTxt}})</button>
+<div class="card" style="background:#FFF7E0;border-color:#F6D98A;font-size:12.5px;color:#5A3B00;line-height:1.5"><b>Regras de cancelamento.</b> Cancelamento grátis até 24 h antes do serviço. Depois disso, pode haver taxa combinada antes do aceite.</div>
+<button class="btn" style="min-height:52px;font-size:16px" sc-camel-on-click="{{enviar}}">Enviar pedido</button>
+<div class="mut" style="text-align:center">Seu contato só é liberado para até 3 profissionais.</div>
+</sc-if>
+
+<sc-if value="{{s_meus}}" hint-placeholder-val="{{ false }}">
+<sc-if value="{{semPedidos}}" hint-placeholder-val="{{ false }}">
+<div class="card" style="text-align:center;display:flex;flex-direction:column;gap:10px;padding:24px 16px">
+<b>Você ainda não fez pedidos</b>
+<div class="mut">Escolha uma categoria e peça seu primeiro orçamento grátis.</div>
+<button class="btn" sc-camel-on-click="{{irHome}}">Ver categorias</button>
+</div>
+</sc-if>
+<sc-for list="{{ped}}" as="o" hint-placeholder-count="1">
+<div class="card" style="display:flex;flex-direction:column;gap:8px">
+<b style="font-size:15px">{{o.titulo}}</b>
+<span class="chip" style="align-self:flex-start">{{o.label}}</span>
+<sc-if value="{{o.a}}" hint-placeholder-val="{{ true }}"><button class="btn" sc-camel-on-click="{{o.verOrc}}">Ver orçamentos</button></sc-if>
+<sc-if value="{{o.b}}" hint-placeholder-val="{{ false }}">
+<div class="mut">Pagamento protegido: o valor só vai ao profissional quando você confirmar o serviço.</div>
+<div style="display:flex;gap:8px"><button class="btn2" style="flex:1" sc-camel-on-click="{{o.chatar}}">Conversar</button><button class="btn" style="flex:1;font-size:13px" sc-camel-on-click="{{o.pagar}}">Pagar com Pix</button></div>
+</sc-if>
+<sc-if value="{{o.prob}}" hint-placeholder-val="{{ false }}">
+<div style="background:#FEF3C7;color:#5A3B00;border-radius:12px;padding:12px;font-size:13px;line-height:1.5"><b>Acompanhamento da garantia</b><br>1. Relato recebido<br>2. A equipe analisa em até 24 h<br>3. Serviço refeito ou valor devolvido</div>
+<button class="btn2" sc-camel-on-click="{{o.suporte}}">Falar com atendente</button>
+</sc-if>
+<sc-if value="{{o.c}}" hint-placeholder-val="{{ false }}"><button class="btn" sc-camel-on-click="{{o.recontratar}}">Contratar de novo</button></sc-if>
+<sc-if value="{{o.p}}" hint-placeholder-val="{{ false }}">
+<div class="lbl">Agendar o serviço</div>
+<div style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{o.agendas}}" as="g" hint-placeholder-count="3"><button class="chipb" sc-camel-on-click="{{g.go}}">{{g.t}}</button></sc-for></div>
+<div style="display:flex;gap:8px"><button class="btn2" style="flex:1" sc-camel-on-click="{{o.chatar}}">Conversar</button><button class="btn" style="flex:1;font-size:13px" sc-camel-on-click="{{o.concluir}}">Confirmar e avaliar</button></div>
+<button sc-camel-on-click="{{o.problema}}" style="background:transparent;color:#B42318;font-weight:700;font-size:13px;min-height:40px">Relatar problema (garantia)</button>
+</sc-if>
+</div>
+</sc-for>
+</sc-if>
+
+<sc-if value="{{s_orc}}" hint-placeholder-val="{{ false }}">
+<div class="mut">Compare e aceite a melhor proposta. Você negocia direto com o profissional.</div>
+<sc-for list="{{orcList}}" as="p" hint-placeholder-count="3">
+<div class="card" style="display:flex;flex-direction:column;gap:10px">
+<div class="row">
+<span class="av">{{p.ini}}</span>
+<span style="flex:1;display:flex;flex-direction:column;gap:2px"><b>{{p.nome}}</b><span class="mut">{{p.oficio}} · Nota {{p.nota}}</span></span>
+<span style="display:flex;flex-direction:column;align-items:flex-end"><span class="mut" style="font-size:11px">Orçamento</span><b style="font-size:17px">{{p.preco}}</b></span>
+</div>
+<div style="display:flex;gap:8px"><button class="btn2" style="flex:1" sc-camel-on-click="{{p.ver}}">Ver perfil</button><button class="btn" style="flex:1;font-size:14px" sc-camel-on-click="{{p.aceitar}}">Aceitar</button></div>
+</div>
+</sc-for>
+</sc-if>
+
+<sc-if value="{{s_chat}}" hint-placeholder-val="{{ false }}">
+<div class="card row">
+<span class="av">{{chatP.ini}}</span>
+<span style="flex:1;display:flex;flex-direction:column;gap:2px"><b>{{chatP.nome}}</b><span class="mut">{{chatP.oficio}} · Nota {{chatP.nota}}</span></span>
+<span class="chip" style="background:#DCFCE7;color:#166534">Verificado</span>
+</div>
+<div class="mut" style="text-align:center;font-size:11.5px">Conversa de demonstração: as respostas do profissional são simuladas por IA.</div>
+<div class="card" style="display:flex;flex-direction:column;gap:10px;min-height:240px">
+<sc-for list="{{msgs}}" as="m" hint-placeholder-count="2">
+<div style="align-self:{{m.al}};align-items:{{m.al}};max-width:84%;display:flex;flex-direction:column;gap:3px">
+<div style="background:{{m.bg}};color:{{m.cor}};padding:10px 12px;border-radius:14px;font-size:13.5px;line-height:1.45;overflow-wrap:anywhere;word-break:break-word">{{m.t}}</div>
+<sc-if value="{{m.dealAberta}}" hint-placeholder-val="{{ false }}">
+<div style="background:#FFF7E0;border:1px solid #F6D98A;border-radius:14px;padding:10px 12px;display:flex;flex-direction:column;gap:8px;color:#5A3B00;font-size:13px">
+<b>Proposta inicial: {{m.valor}}</b>
+<button class="btn" style="min-height:40px;font-size:13px" sc-camel-on-click="{{m.aceitar}}">Aceitar proposta</button>
+</div>
+</sc-if>
+<sc-if value="{{m.aceito}}" hint-placeholder-val="{{ false }}"><span style="font-size:12px;font-weight:700;color:#166534">Proposta aceita</span></sc-if>
+<span style="font-size:10.5px;color:#6B7F7B">{{m.h}}</span>
+</div>
+</sc-for>
+<sc-if value="{{typing}}" hint-placeholder-val="{{ false }}"><div class="mut" style="font-style:italic">{{typingTxt}}</div></sc-if>
+</div>
+<div style="position:sticky;bottom:0;z-index:3;background:#EFF7F5;padding:8px 0 2px;display:flex;flex-direction:column;gap:8px">
+<div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:2px">
+<sc-for list="{{respostas}}" as="r" hint-placeholder-count="3"><button class="chipb" style="flex:none;white-space:nowrap" sc-camel-on-mouse-down="{{r.keep}}" sc-camel-on-click="{{r.go}}">{{r.t}}</button></sc-for>
+</div>
+<div style="display:flex;gap:8px">
+<input id="chatinp" class="in" aria-label="Escreva sua mensagem" placeholder="Escreva sua mensagem" autocomplete="off" enterkeyhint="send" sc-camel-on-input="{{onCtxt}}" sc-camel-on-key-down="{{chatKey}}" sc-camel-on-focus="{{chatFocus}}">
+<button sc-camel-on-mouse-down="{{keep}}" sc-camel-on-click="{{enviarChat}}" aria-label="Enviar mensagem" style="width:48px;flex:none;border-radius:12px;background:#F59E0B;color:#1F2937;display:flex;align-items:center;justify-content:center">
+<svg width="20" height="20" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"></path></svg></button>
+</div>
+</div>
+<div id="chatend"></div>
+</sc-if>
+
+<sc-if value="{{s_aval}}" hint-placeholder-val="{{ false }}">
+<div class="card" style="display:flex;flex-direction:column;gap:12px;text-align:center">
+<b>Como foi o serviço?</b>
+<div style="display:flex;gap:8px;justify-content:center">
+<sc-for list="{{estrelas}}" as="e" hint-placeholder-count="5">
+<button aria-label="Nota {{e.n}}" sc-camel-on-click="{{e.pick}}" style="width:52px;height:52px;border-radius:14px;background:{{e.bg}};border:2px solid {{e.borda}}!important;color:#B45309;display:flex;align-items:center;justify-content:center">
+<svg width="26" height="26" sc-camel-view-box="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"></path></svg></button>
+</sc-for>
+</div>
+<div class="mut">{{notaTxt}}</div>
+</div>
+<button class="btn" sc-camel-on-click="{{enviarAval}}">{{avalBtn}}</button>
+</sc-if>
+
+<sc-if value="{{s_phome}}" hint-placeholder-val="{{ false }}">
+<div class="card" style="background:linear-gradient(135deg,#115E59,#0D9488);color:#fff;border:0;display:flex;justify-content:space-between;align-items:center">
+<span style="display:flex;flex-direction:column"><span style="font-size:12px;opacity:.85">Seus créditos</span><b style="font-size:28px">{{creditos}}</b></span>
+<button sc-camel-on-click="{{irCred}}" style="background:#F59E0B;color:#1F2937;font-weight:700;border-radius:12px;min-height:44px;padding:0 14px">Comprar</button>
+</div>
+<div class="h">Novos pedidos em Tupã</div>
+<sc-for list="{{ppeds}}" as="q" hint-placeholder-count="2">
+<div class="card" style="display:flex;flex-direction:column;gap:6px">
+<b style="font-size:15px">{{q.titulo}}</b>
+<div class="mut">{{q.info}}</div>
+<sc-if value="{{q.desc}}" hint-placeholder-val="{{ false }}"><span class="chip" style="align-self:flex-start;background:#FEF3C7;color:#92400E">{{q.nota}}</span></sc-if>
+<sc-if value="{{q.fechado}}" hint-placeholder-val="{{ true }}"><button class="btn" style="margin-top:4px" sc-camel-on-click="{{q.abrir}}">{{q.btn}}</button></sc-if>
+<sc-if value="{{q.aberto}}" hint-placeholder-val="{{ false }}">
+<div style="background:#DCFCE7;color:#166534;border-radius:12px;padding:10px;font-weight:600;font-size:13px">Contato liberado. O cliente responde em até 48 h, ou o crédito volta.</div>
+</sc-if>
+<sc-if value="{{q.semEnv}}" hint-placeholder-val="{{ false }}">
+<div class="mut">Envie seu orçamento:</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap"><sc-for list="{{q.vals}}" as="v" hint-placeholder-count="3"><button class="chipb" sc-camel-on-click="{{v.go}}">{{v.t}}</button></sc-for></div>
+</sc-if>
+<sc-if value="{{q.temEnv}}" hint-placeholder-val="{{ false }}"><b style="color:#115E59">Orçamento enviado: {{q.enviado}}</b></sc-if>
+<sc-if value="{{q.podeDen}}" hint-placeholder-val="{{ false }}"><button sc-camel-on-click="{{q.denunciar}}" style="background:transparent;color:#B42318;font-weight:700;font-size:13px;min-height:40px;align-self:flex-start;text-align:left">Pedido falso ou de teste? Denunciar e recuperar o crédito</button></sc-if>
+<sc-if value="{{q.devolvido}}" hint-placeholder-val="{{ false }}"><span class="chip" style="align-self:flex-start;background:#DCFCE7;color:#166534">Crédito devolvido</span></sc-if>
+</div>
+</sc-for>
+<div class="card" style="display:flex;flex-direction:column;gap:8px">
+<div class="h">Avalie seu cliente</div>
+<div class="mut">Serviço concluído: Ana, bairro Centro (exemplo).</div>
+<div style="display:flex;gap:6px"><sc-for list="{{estrelasCli}}" as="e" hint-placeholder-count="5"><button aria-label="Nota {{e.n}}" sc-camel-on-click="{{e.go}}" style="width:46px;height:46px;border-radius:12px;background:{{e.bg}};border:2px solid {{e.borda}}!important;color:#B45309;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" sc-camel-view-box="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"></path></svg></button></sc-for></div>
+</div>
+</sc-if>
+
+<sc-if value="{{s_pcred}}" hint-placeholder-val="{{ false }}">
+<div class="card" style="display:flex;justify-content:space-between;align-items:center">
+<span style="display:flex;flex-direction:column"><span class="mut">Saldo</span><b style="font-size:28px">{{creditos}}</b></span>
+<span class="chip">Crédito volta se o cliente não responder</span>
+</div>
+<sc-if value="{{temPixMsg}}" hint-placeholder-val="{{ false }}"><div style="background:#DCFCE7;color:#166534;border-radius:12px;padding:12px;font-weight:600;font-size:13.5px">{{pixMsg}}</div></sc-if>
+<div class="h">Pacotes de créditos</div>
+<sc-for list="{{pacotes}}" as="k" hint-placeholder-count="3">
+<button class="card tile" sc-camel-on-click="{{k.comprar}}" style="display:flex;align-items:center;gap:12px;text-align:left">
+<span style="flex:1;display:flex;flex-direction:column;gap:2px"><b style="font-size:15px;color:#0F2A27">{{k.nome}}</b><span class="mut">{{k.cred}} créditos</span></span>
+<span style="display:flex;flex-direction:column;align-items:flex-end;gap:2px"><b style="font-size:17px;color:#0F2A27">{{k.preco}}</b><span style="font-size:11px;font-weight:700;color:#B45309">{{k.tag}}</span></span>
+</button>
+</sc-for>
+<sc-if value="{{showPix}}" hint-placeholder-val="{{ false }}">
+<div class="card" style="display:flex;flex-direction:column;gap:10px;border:2px solid #0D9488">
+<b>Pague com Pix</b>
+<div style="background:#EFF7F5;border-radius:12px;padding:12px;font-size:12px;word-break:break-all;color:#456461">00020126580014BR.GOV.BCB.PIX-EXEMPLO-CONECTAJA</div>
+<button class="btn" sc-camel-on-click="{{simular}}">Simular pagamento</button>
+</div>
+</sc-if>
+<div class="card" style="display:flex;flex-direction:column;gap:6px"><div class="h">Extrato</div>
+<sc-for list="{{extrato}}" as="x" hint-placeholder-count="2"><div style="display:flex;justify-content:space-between;gap:8px;font-size:13px"><span>{{x.t}}</span><b>{{x.v}}</b></div></sc-for>
+<div class="mut">Créditos válidos por 12 meses. Devolvidos automaticamente em pedido falso, duplicado ou sem resposta do cliente em 48 h.</div></div>
+<div class="mut" style="text-align:center">Valores de exemplo, apenas para demonstração.</div>
+</sc-if>
+
+<sc-if value="{{s_notif}}" hint-placeholder-val="{{ false }}">
+<sc-if value="{{semNotif}}" hint-placeholder-val="{{ false }}"><div class="card mut" style="text-align:center">Nenhuma notificação ainda. Seus avisos aparecem aqui.</div></sc-if>
+<sc-for list="{{notifs}}" as="n" hint-placeholder-count="3"><div class="card" style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start"><span style="font-size:13.5px;line-height:1.4">{{n.t}}</span><span class="mut" style="flex:none">{{n.h}}</span></div></sc-for>
+</sc-if>
+
+<sc-if value="{{s_suporte}}" hint-placeholder-val="{{ false }}">
+<div class="card" style="display:flex;flex-direction:column;gap:10px">
+<b>Fale com a equipe</b>
+<div class="mut">Atendimento humano por chat e WhatsApp, de segunda a sexta, das 8h às 18h. Resposta em até 2 horas úteis.</div>
+<div class="lbl">Assunto</div>
+<div style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{assuntos}}" as="a" hint-placeholder-count="4"><button class="chipb" style="background:{{a.bg}}" sc-camel-on-click="{{a.go}}">{{a.t}}</button></sc-for></div>
+<button class="btn" sc-camel-on-click="{{abrirChamado}}">Abrir chamado</button>
+</div>
+<sc-if value="{{temProt}}" hint-placeholder-val="{{ false }}"><div style="background:#DCFCE7;color:#166534;border-radius:14px;padding:14px;font-weight:600;font-size:13.5px;line-height:1.4">Chamado aberto. Protocolo {{protocolo}}. Retornamos em até 2 horas úteis.</div></sc-if>
+</sc-if>
+
+<sc-if value="{{s_adm}}" hint-placeholder-val="{{ false }}">
+<div class="mut">Demonstração do painel web da equipe ConectaJa. Números de exemplo.</div>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px">
+<div class="card" style="padding:12px"><div class="mut">Prestadores ativos</div><b style="font-size:22px">24</b></div>
+<div class="card" style="padding:12px"><div class="mut">Pedidos na semana</div><b style="font-size:22px">37</b></div>
+<div class="card" style="padding:12px"><div class="mut">Taxa de resposta</div><b style="font-size:22px">82%</b></div>
+<div class="card" style="padding:12px"><div class="mut">Créditos vendidos</div><b style="font-size:22px">540</b></div>
+</div>
+<div class="card" style="display:flex;flex-direction:column;gap:8px"><b>Prestadores em análise</b><span class="mut">{{admAn}} aguardando verificação</span><button class="btn" sc-camel-on-click="{{admAprova}}">Aprovar próximo</button></div>
+<div class="card" style="display:flex;flex-direction:column;gap:8px"><b>Denúncias abertas</b><span class="mut">{{admDen}} para analisar</span><button class="btn" sc-camel-on-click="{{admResolve}}">Resolver denúncia</button></div>
+<div class="card" style="display:flex;flex-direction:column;gap:8px"><b>Reembolsos e garantias</b><span class="mut">{{admRe}} pendente</span><button class="btn" sc-camel-on-click="{{admReemb}}">Aprovar reembolso</button></div>
+</sc-if>
+
+<sc-if value="{{s_onb}}" hint-placeholder-val="{{ false }}">
+<div class="card" style="display:flex;flex-direction:column;gap:14px;align-items:center;text-align:center;padding:28px 18px;margin-top:16px">
+<span style="width:64px;height:64px;border-radius:20px;background:linear-gradient(135deg,#115E59,#0D9488);color:#fff;display:flex;align-items:center;justify-content:center"><svg width="30" height="30" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg></span>
+<div style="font-size:20px;font-weight:700">{{slTitle}}</div>
+<div class="mut" style="font-size:14px;line-height:1.5">{{slText}}</div>
+<div style="display:flex;gap:6px"><sc-for list="{{dots}}" as="d" hint-placeholder-count="3"><span style="width:8px;height:8px;border-radius:4px;background:{{d.bg}}"></span></sc-for></div>
+</div>
+<button class="btn" sc-camel-on-click="{{onbNext}}">{{onbBtn}}</button>
+<button sc-camel-on-click="{{onbSkip}}" style="background:transparent;color:#456461;font-weight:600;min-height:40px">Pular</button>
+</sc-if>
+
+<sc-if value="{{s_codigo}}" hint-placeholder-val="{{ false }}">
+<div class="card" style="display:flex;flex-direction:column;gap:10px">
+<b>Enviamos um código</b>
+<div class="mut">Digite o código de 4 dígitos enviado por SMS para (14) 99999-0000.</div>
+<label for="codinp" class="lbl">Código</label>
+<input id="codinp" class="in" inputmode="numeric" maxlength="4" value="1234" style="text-align:center;font-size:22px;letter-spacing:8px">
+</div>
+<button class="btn" sc-camel-on-click="{{confCod}}">Confirmar</button>
+<button sc-camel-on-click="{{reenviar}}" style="background:transparent;color:#115E59;font-weight:700;min-height:44px">Reenviar código</button>
+</sc-if>
+
+<sc-if value="{{s_menu}}" hint-placeholder-val="{{ false }}">
+<sc-for list="{{menuItems}}" as="m" hint-placeholder-count="5">
+<button class="card tile" sc-camel-on-click="{{m.go}}" style="display:flex;align-items:center;gap:12px;text-align:left">
+<span style="flex:1;display:flex;flex-direction:column;gap:2px"><b style="color:{{m.cor}};font-size:14.5px">{{m.t}}</b><span class="mut">{{m.d}}</span></span>
+<span style="color:#115E59;font-weight:700;font-size:12px">{{m.val}}</span>
+</button>
+</sc-for>
+</sc-if>
+
+<sc-if value="{{s_info}}" hint-placeholder-val="{{ false }}">
+<sc-for list="{{infoBlocks}}" as="b" hint-placeholder-count="3"><div class="card" style="display:flex;flex-direction:column;gap:6px"><b>{{b.h}}</b><div style="font-size:13.5px;line-height:1.5">{{b.p}}</div></div></sc-for>
+<div class="mut" style="text-align:center">Texto de demonstração. A versão definitiva deve ser revisada por um advogado.</div>
+</sc-if>
+
+<sc-if value="{{s_favs}}" hint-placeholder-val="{{ false }}">
+<sc-if value="{{semFavs}}" hint-placeholder-val="{{ false }}"><div class="card mut" style="text-align:center">Você ainda não favoritou ninguém. Toque no coração no cartão do profissional.</div></sc-if>
+<sc-for list="{{favList}}" as="p" hint-placeholder-count="2">
+<button class="card tile" sc-camel-on-click="{{p.ver}}" style="display:flex;gap:12px;align-items:center;text-align:left"><span class="av">{{p.ini}}</span><span style="flex:1;display:flex;flex-direction:column;gap:2px"><b style="color:#0F2A27">{{p.nome}}</b><span class="mut">{{p.oficio}} · {{p.dist}}</span></span><b style="color:#115E59">{{p.nota}}</b></button>
+</sc-for>
+</sc-if>
+
+<sc-if value="{{s_recibos}}" hint-placeholder-val="{{ false }}">
+<sc-if value="{{semRec}}" hint-placeholder-val="{{ false }}"><div class="card mut" style="text-align:center">Nenhum pagamento ainda. Depois de pagar um serviço, o recibo aparece aqui.</div></sc-if>
+<sc-for list="{{recs}}" as="r" hint-placeholder-count="1">
+<div class="card" style="display:flex;flex-direction:column;gap:6px">
+<div style="display:flex;justify-content:space-between;gap:8px"><b>{{r.titulo}}</b><b>{{r.valor}}</b></div>
+<div class="mut">{{r.status}} · Recibo {{r.num}}</div>
+<button class="btn2" sc-camel-on-click="{{r.baixar}}">Baixar recibo (simulado)</button>
+</div>
+</sc-for>
+</sc-if>
+
+<sc-if value="{{s_indique}}" hint-placeholder-val="{{ false }}">
+<div class="card" style="display:flex;flex-direction:column;gap:10px;align-items:center;text-align:center;padding:22px 16px">
+<b style="font-size:16px">Convide amigos de Tupã</b>
+<div class="mut">Compartilhe seu código. Os bônus de indicação serão definidos no lançamento.</div>
+<div style="background:#EFF7F5;border:2px dashed #0D9488;border-radius:14px;padding:14px 22px;font-size:20px;font-weight:700;letter-spacing:2px;color:#115E59">CONECTA-TUPA</div>
+<button class="btn" style="width:100%" sc-camel-on-click="{{copiar}}">Copiar código</button>
+<button class="btn2" style="width:100%" sc-camel-on-click="{{compartilhar}}">Compartilhar no WhatsApp</button>
+</div>
+</sc-if>
+
+<sc-if value="{{s_pperfil}}" hint-placeholder-val="{{ false }}">
+<div class="card" style="display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;justify-content:space-between"><b>Verificação do perfil</b><span class="chip">{{statusTxt}}</span></div>
+<div style="height:8px;border-radius:99px;background:#D5E8E4"><div style="height:8px;border-radius:99px;background:#0D9488;width:{{prog}}"></div></div>
+<sc-for list="{{etapas}}" as="e" hint-placeholder-count="4">
+<button sc-camel-on-click="{{e.tog}}" style="background:{{e.bg}};border-radius:12px;padding:0 12px;min-height:48px;display:flex;justify-content:space-between;align-items:center;text-align:left;color:#0F2A27;font-size:13.5px;font-weight:600">
+<span>{{e.t}}</span><span style="font-size:12px;color:{{e.cor}};font-weight:700">{{e.pill}}</span>
+</button>
+</sc-for>
+<div class="lbl">Categorias que você atende</div>
+<div style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{pcats}}" as="c" hint-placeholder-count="4"><button class="chipb" style="background:{{c.bg}}" sc-camel-on-click="{{c.go}}">{{c.t}}</button></sc-for></div>
+<div class="lbl">Bairros que você atende</div>
+<div style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{pbairros}}" as="c" hint-placeholder-count="4"><button class="chipb" style="background:{{c.bg}}" sc-camel-on-click="{{c.go}}">{{c.t}}</button></sc-for></div>
+<div class="lbl">Raio de atendimento</div>
+<div style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{praios}}" as="c" hint-placeholder-count="3"><button class="chipb" style="background:{{c.bg}}" sc-camel-on-click="{{c.go}}">{{c.t}}</button></sc-for></div>
+<div class="lbl">Preço inicial</div>
+<div style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{pfaixas}}" as="c" hint-placeholder-count="3"><button class="chipb" style="background:{{c.bg}}" sc-camel-on-click="{{c.go}}">{{c.t}}</button></sc-for></div>
+<sc-if value="{{cadRasc}}" hint-placeholder-val="{{ true }}"><button class="btn" sc-camel-on-click="{{enviarCad}}">{{cadBtn}}</button></sc-if>
+<sc-if value="{{cadAnal}}" hint-placeholder-val="{{ false }}"><button class="btn" sc-camel-on-click="{{aprovar}}">Simular aprovação da equipe</button></sc-if>
+<sc-if value="{{cadVer}}" hint-placeholder-val="{{ false }}"><div style="background:#DCFCE7;color:#166534;border-radius:12px;padding:12px;font-weight:600;font-size:13.5px">Perfil verificado. Você já aparece para os clientes.</div></sc-if>
+</div>
+<div class="card" style="display:flex;flex-direction:column;gap:8px">
+<div class="h">Avaliações recebidas</div>
+<div style="font-size:13.5px;line-height:1.45">Serviço no prazo e bem feito. <span class="mut">[exemplo]</span></div>
+<sc-if value="{{respondido}}" hint-placeholder-val="{{ false }}"><div style="background:#EFF7F5;border-radius:12px;padding:10px;font-size:13px"><b>Sua resposta:</b> Obrigado pela confiança!</div></sc-if>
+<sc-if value="{{naoRespondido}}" hint-placeholder-val="{{ false }}"><button class="btn2" sc-camel-on-click="{{responder}}">Responder avaliação</button></sc-if>
+</div>
+<div class="h">Benefícios para você</div>
+<sc-for list="{{bens}}" as="b" hint-placeholder-count="3">
+<div class="card" style="display:flex;flex-direction:column;gap:2px"><b>{{b.t}}</b><span class="mut">{{b.d}}</span></div>
+</sc-for>
+</sc-if>
+
+</div>
+
+<sc-if value="{{showNav}}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;background:#fff;border-top:1px solid #D5E8E4;padding:6px 8px 14px;gap:2px">
+<sc-for list="{{nav}}" as="n" hint-placeholder-count="4">
+<button sc-camel-on-click="{{n.go}}" style="flex:1;min-height:54px;border-radius:12px;background:#fff;color:{{n.cor}};font-size:11.5px;font-weight:600;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px">
+<svg width="22" height="22" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{n.peso}}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{n.d}}"></path></svg>
+<span>{{n.rotulo}}</span>
+</button>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{temToast}}" hint-placeholder-val="{{ false }}">
+<div role="status" style="position:absolute;left:20px;right:20px;top:140px;z-index:15;background:#0F2A27;color:#fff;border-radius:14px;padding:12px 14px;font-size:13.5px;font-weight:600;box-shadow:0 8px 20px rgba(0,0,0,.25);animation:pop .25s ease both">{{toast}}</div>
+</sc-if>
+
+<button sc-camel-on-click="{{abrirAjuda}}" style="position:absolute;right:16px;bottom:{{fabBottom}};background:#115E59;color:#fff;border-radius:999px;min-height:48px;padding:0 16px;display:flex;align-items:center;gap:8px;font-weight:700;font-size:13.5px;box-shadow:0 6px 16px rgba(17,94,89,.35)">
+<svg width="20" height="20" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"></path></svg>Ajuda IA</button>
+
+<sc-if value="{{ajudaAberta}}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;background:rgba(15,42,39,.45);display:flex;flex-direction:column;justify-content:flex-end;z-index:20">
+<div style="background:#fff;border-radius:24px 24px 0 0;height:78%;display:flex;flex-direction:column;overflow:hidden">
+<div style="background:#115E59;color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center">
+<span style="display:flex;flex-direction:column"><b style="font-size:16px">Assistente ConectaJa</b><span style="font-size:12px;opacity:.85">Tire dúvidas sobre o app</span></span>
+<button sc-camel-on-click="{{fecharAjuda}}" aria-label="Fechar" style="width:36px;height:36px;border-radius:12px;background:rgba(255,255,255,.18);color:#fff;display:flex;align-items:center;justify-content:center">
+<svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</div>
+<div style="flex:1;overflow:auto;padding:14px;display:flex;flex-direction:column;gap:8px;background:#F6FBFA">
+<sc-for list="{{amsgs}}" as="m" hint-placeholder-count="2">
+<div style="align-self:{{m.al}};background:{{m.bg}};color:{{m.cor}};padding:10px 12px;border-radius:14px;max-width:85%;font-size:13.5px;line-height:1.45">{{m.t}}</div>
+</sc-for>
+<div id="aend"></div>
+</div>
+<div style="padding:8px 12px;display:flex;gap:6px;overflow-x:auto;border-top:1px solid #D5E8E4">
+<button class="chipb" style="flex:none;white-space:nowrap;background:#FEF3C7;border-color:#F59E0B!important" sc-camel-on-mouse-down="{{keep}}" sc-camel-on-click="{{irSuporte}}">Falar com atendente</button>
+<sc-for list="{{perguntas}}" as="q" hint-placeholder-count="4"><button class="chipb" style="flex:none;white-space:nowrap" sc-camel-on-mouse-down="{{q.keep}}" sc-camel-on-click="{{q.go}}">{{q.t}}</button></sc-for>
+</div>
+<div style="display:flex;gap:8px;padding:8px 12px 14px">
+<input id="ajudainp" class="in" aria-label="Digite sua dúvida" placeholder="Digite sua dúvida" autocomplete="off" enterkeyhint="send" sc-camel-on-input="{{onAtxt}}" sc-camel-on-key-down="{{ajudaKey}}" sc-camel-on-focus="{{ajudaFocus}}">
+<button sc-camel-on-mouse-down="{{keep}}" sc-camel-on-click="{{enviarAjuda}}" aria-label="Enviar" style="width:48px;flex:none;border-radius:12px;background:#F59E0B;color:#1F2937;display:flex;align-items:center;justify-content:center">
+<svg width="20" height="20" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"></path></svg></button>
+</div>
+</div>
+</div>
+</sc-if>
+
+</div>
+</x-dc>
+
+  <script type="text/x-dc" data-dc-script="" data-props="{&quot;$preview&quot;:{&quot;width&quot;:390,&quot;height&quot;:844}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { screen:'login', role:'cliente', cat:'Reformas e construção', para:null, selNome:null, sort:'todos', q:'', pedidos:[], ativo:null, nota:0, chat:[], chatNome:'', ajuda:false,
+      amsgs:[{ de:'bot', t:'Oi! Sou o assistente do ConectaJa. Toque em uma pergunta ou escreva sua dúvida.' }], atxt:'', ctxt:'', typing:false, atyp:false, toast:'', aceite:false, onb:0, visto:false, novo:false, favs:{}, cats:{}, bairros:{}, raio:5, faixa:'', infoKey:'sobre', offline:false, grande:false, avCli:0, respondido:false, avisos:{}, notifs:[], unread:0, extrato:[{ t:'Bônus de boas-vindas', v:'+10' }], fotos:0, denunc:{}, admAn:3, admDen:2, admRe:1, assunto:'Pagamento', protocolo:'', creditos:10, abertos:{}, env:{}, pix:null, pixMsg:'',
+      etapas:{ doc:false, selfie:false, cats:false, bairros:false }, cadastro:'rascunho', seq:1 };
+  }
+  nz(t) { return (t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+  answer(q) {
+    const t = this.nz(q);
+    const kb = [
+      [['favorit'], 'Toque em Favoritar no perfil do profissional. Seus favoritos ficam em Menu, Favoritos, e você pode contratar de novo rapidamente.'],
+      [['recibo','comprovante','nota fiscal'], 'Em Menu, Recibos e pagamentos, você vê o histórico e baixa o comprovante de cada serviço pago.'],
+      [['indic','convite','convidar'], 'Em Menu, Indique e ganhe, você copia seu código e convida amigos de Tupã. Os bônus serão definidos no lançamento.'],
+      [['codigo','sms','senha','login'], 'O acesso usa celular e senha, e a confirmação é feita por um código enviado por SMS ou WhatsApp.'],
+      [['excluir','apagar conta','deletar'], 'Em Menu, Excluir minha conta remove seus dados, conforme a LGPD.'],
+      [['texto maior','acessib','fonte','letra'], 'Em Menu, ligue Texto maior para aumentar o tamanho das telas.'],
+      [['raio','distancia','perto','km'], 'Os cards mostram a distância até cada profissional, e você pode ordenar por Mais perto. O prestador escolhe o raio de atendimento (3, 5 ou 10 km) no perfil.'],
+      [['foto','imagem','portfolio'], 'Você pode adicionar até 4 fotos no pedido e enviar uma foto no chat. O prestador mostra portfólio no perfil.'],
+      [['protegido','garantia','reter','pagar com','pagamento'], 'Com o pagamento protegido, o cliente paga pelo app e o valor fica retido. Só é liberado ao profissional quando o cliente confirma o serviço. Se der problema, toque em Relatar problema: a equipe refaz o serviço ou devolve o valor.'],
+      [['agend','lembrete','horario'], 'Depois de pagar, escolha o dia e o horário em Pedidos. O app envia um lembrete antes do serviço.'],
+      [['atendente','humano','protocolo','falar com'], 'Para falar com uma pessoa, toque em Falar com atendente. Você recebe um número de protocolo e a resposta vem em até 2 horas úteis, de segunda a sexta.'],
+      [['extrato','validade','vence','expir'], 'Os créditos valem por 12 meses. Em Créditos você vê o extrato com compras, usos e devoluções.'],
+      [['notific','aviso','sino'], 'O sino no topo mostra seus avisos: pedidos, propostas, pagamentos e lembretes.'],
+      [['libero','liberar','desbloque','envio','enviar orc'], 'No app do prestador, abra Pedidos e toque em Liberar contato (1 ou 2 créditos; custa menos se outros profissionais já viram o pedido). Depois escolha o valor e envie o orçamento. O cliente tem 48 horas para responder, ou o crédito volta.'],
+      [['como funciona','funciona','o que e','conectaja'], 'O ConectaJa conecta clientes e prestadores de serviço de Tupã. O cliente escolhe uma categoria, pede um orçamento grátis e recebe propostas de até 3 profissionais. O prestador usa créditos para liberar o contato dos pedidos. No fim, o cliente avalia o serviço.'],
+      [['pedir','pedido','solicitar','orcamento','contratar'], 'Para pedir um serviço: 1) na tela Início, escolha a categoria; 2) veja os profissionais e toque em Pedir orçamento; 3) descreva o serviço e envie; 4) em Pedidos, compare as propostas e aceite a melhor.'],
+      [['cliente pag','custa','gratis','preco','cobra'], 'Para o cliente, o app é grátis: pedir orçamento e receber propostas não custa nada. O valor do serviço é combinado direto com o profissional.'],
+      [['credito','moeda','pacote','pix','comprar'], 'Os créditos são a moeda do prestador. Cada contato liberado gasta créditos (se outros profissionais já viram o pedido, custa menos). Os pacotes são comprados por Pix na aba Créditos. Se o cliente não responder em 48 horas, o crédito volta.'],
+      [['confia','seguro','seguranca','verific','golpe','documento'], 'Todo prestador envia documento e selfie para verificação. As avaliações só podem ser feitas por quem realmente contratou, e você pode denunciar qualquer perfil suspeito.'],
+      [['avali','nota','estrela'], 'Depois de aceitar uma proposta, vá em Pedidos e toque em Concluir e avaliar. Escolha de 1 a 5 estrelas. As notas aparecem no perfil do profissional.'],
+      [['cadastr','prestador','trabalhar','verificacao'], 'Para ser prestador, entre como Prestador e abra a aba Perfil. Conclua 4 etapas (documento, selfie, categorias e bairros) e envie para análise. Depois de aprovado, você aparece para os clientes.'],
+      [['chat','conversar','whatsapp','mensagem'], 'Você pode conversar com o profissional pelo chat do app, tanto no perfil dele quanto em Pedidos, depois de aceitar a proposta.'],
+      [['tupa','cidade','local','bairro'], 'O ConectaJa é feito para Tupã: só aparecem profissionais da cidade e região, com atendimento rápido e presencial.'],
+      [['suporte','ajuda','problema','reclam'], 'Se algo der errado, o suporte atende por chat e WhatsApp. Você também pode denunciar um perfil ou avaliar o serviço para nos avisar.'],
+      [['cancel','desist','reembolso','estorno'], 'Se o cliente não responder em 48 horas, o crédito do prestador volta automaticamente. O cliente pode recusar propostas sem custo, e cancelamentos do serviço são combinados pelo chat.'],
+      [['privacidade','lgpd','dados','telefone'], 'O contato do cliente só é liberado para até 3 profissionais, e só depois do pedido. Os dados seguem a LGPD.'],
+      [['categoria','tipos de servico'], 'As categorias são: Reformas e construção, Casa e limpeza, Reparos, Automotivo, Aulas e reforço, Beleza e bem-estar, Eventos e Fretes e mudanças.'],
+      [['denunc','bloque'], 'Para denunciar, abra o perfil ou o chat do profissional e use a opção de denúncia. A equipe analisa e pode suspender o perfil.']
+    ];
+    this._kb = kb;
+    for (const [keys, ans] of kb) { if (keys.some((k) => t.includes(k))) return ans; }
+    return 'Posso explicar: como funciona, como pedir um serviço, custos, créditos, verificação, avaliações e cadastro de prestador. Toque em uma das perguntas abaixo.';
+  }
+  root(e) { const n = e && (e.currentTarget || e.target); if (n && n.getRootNode) this._root = n.getRootNode(); }
+  getChat() { return this._chat || this.state.chat; }
+  getAm() { return this._am || this.state.amsgs; }
+  toEnd(id) { setTimeout(() => { const r = this._root || document; const n = r.querySelector('#' + id); if (n && n.scrollIntoView) n.scrollIntoView({ block:'end' }); }, 90); }
+  restore(id, want) {
+    const go = () => {
+      const r = this._root || document; const n = r.querySelector('#' + id); if (!n) return;
+      const d = (this._draft || {})[id] || '';
+      if (n.value !== d) n.value = d;
+      if (want && n.focus) n.focus({ preventScroll:true });
+    };
+    setTimeout(go, 40); setTimeout(go, 320);
+  }
+  draft(e, id) { this.root(e); this._draft = this._draft || {}; this._draft[id] = e.target.value; }
+  typed(e, key, id) {
+    this.root(e); const el = e.target; const pos = el.selectionStart;
+    this.setState({ [key]: el.value });
+    setTimeout(() => { const r = this._root || document; const n = r.querySelector('#' + id); if (n && n !== el && n.focus) { n.focus({ preventScroll:true }); try { n.setSelectionRange(pos, pos); } catch (x) {} } }, 0);
+  }
+  readInput(id, e) {
+    this.root(e); const r = this._root || document; const el = r.querySelector('#' + id);
+    const d = this._draft || {};
+    return { el, txt: ((el && el.value) || d[id] || '').trim() };
+  }
+  sendChat(p, e) {
+    const { el, txt } = this.readInput('chatinp', e);
+    if (!txt || this._busy) return;
+    if (el) el.value = '';
+    this._draft = this._draft || {}; this._draft.chatinp = '';
+    this._wantFocus = true;
+    this.chatSend(txt, p, e);
+  }
+  sendAjuda(e) {
+    const { el, txt } = this.readInput('ajudainp', e);
+    if (!txt || this._abusy) return;
+    if (el) el.value = '';
+    this._draft = this._draft || {}; this._draft.ajudainp = '';
+    this._wantA = true;
+    this.ask(txt, e);
+  }
+  hora() { const d = new Date(); return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); }
+  ext(t, v) { this.setState({ extrato:[{ t, v }, ...(this.state.extrato || [])].slice(0, 30) }); }
+  flash(msg) { const z = this.state; this.setState({ toast:msg, notifs:[{ t:msg, h:this.hora() }, ...(z.notifs || [])].slice(0, 20), unread:(z.unread || 0) + 1 }); clearTimeout(this._tt); this._tt = setTimeout(() => this.setState({ toast:'' }), 2600); }
+  async sampleText(input) {
+    try {
+      const c = window.claude;
+      const sample = c && c.use ? await c.use('sample') : null;
+      if (!sample) return null;
+      const r = await sample(input, { cache:false, modelTier:'quick' });
+      return r && r.text ? r.text.trim() : null;
+    } catch (e) { return null; }
+  }
+  async ask(q, e) {
+    this.root(e);
+    if (!q || this._abusy) return;
+    this._abusy = true;
+    const prev = this.getAm();
+    const cur = [...prev, { de:'eu', t:q }];
+    this._am = cur;
+    try {
+    const base = this.answer(q);
+    const hist = prev.slice(-4).map((m) => (m.de === 'eu' ? 'Usuário: ' : 'Assistente: ') + m.t).join('\n');
+    this.setState({ amsgs:cur, atyp:true });
+    this.toEnd('aend'); this.restore('ajudainp', this._wantA);
+    const kbTxt = (this._kb || []).map(([k, a]) => a).join('\n- ');
+    const input = 'Você é o assistente de ajuda do app ConectaJa, um marketplace de serviços da cidade de Tupã (SP), no estilo de apps como GetNinjas. Explique como o app funciona usando SOMENTE as informações abaixo. Se a pergunta fugir do app ou você não souber, diga isso com gentileza e sugira o suporte. Responda em português do Brasil, em até 4 frases curtas, sem emojis e sem formatação especial.\n\nInformações do app:\n- ' + kbTxt + '\n\nContexto: o usuário está como ' + this.state.role + ' na tela "' + this.state.screen + '".\n\nConversa recente:\n' + hist + '\n\nPergunta atual: ' + q;
+    const ai = await this.sampleText(input);
+    if (!ai) await new Promise((r) => setTimeout(r, 600));
+    const nxt = [...this._am, { de:'bot', t: ai || base }];
+    this._am = nxt;
+    this.setState({ amsgs:nxt, atyp:false });
+    } catch (err) { this.setState({ atyp:false }); }
+    finally { this._abusy = false; this.toEnd('aend'); this.restore('ajudainp', this._wantA); }
+  }
+  fallbackChat(text, p) {
+    const t = this.nz(text);
+    if (/enviei uma foto/.test(t)) return 'Recebi a foto, obrigado! Assim consigo avaliar melhor o serviço.';
+    if (/valor|quanto|preco|orcamento/.test(t)) return 'Meu valor começa em ' + p.preco + ', e confirmo o preço final depois de ver o serviço.';
+    if (/prazo|quando|amanha|hoje|hora|dia|semana/.test(t)) return 'Consigo atender em até 2 dias úteis. Qual horário é melhor para você?';
+    if (/endereco|onde|local|bairro|centro/.test(t)) return 'Atendo em ' + p.bairro + '. Pode me confirmar o seu bairro?';
+    if (/foto|imagem|video/.test(t)) return 'Pode mandar sim! Com a foto eu avalio melhor e fecho o orçamento.';
+    if (/obrigad|valeu|combinado|fechado|ok|certo/.test(t)) return 'Combinado! Qualquer dúvida é só chamar por aqui.';
+    return 'Entendi! Pode me dar mais detalhes do serviço para eu passar um orçamento certinho?';
+  }
+  async chatSend(text, p, e) {
+    this.root(e);
+    if (!text || this._busy) return;
+    this._busy = true;
+    const tok = this._tok;
+    const cur = [...this.getChat(), { de:'eu', t:text, h:this.hora() }];
+    this._chat = cur;
+    try {
+    this.setState({ chat:cur, typing:true });
+    this.toEnd('chatend'); this.restore('chatinp', this._wantFocus);
+    const hist = cur.slice(-6).map((m) => (m.de === 'eu' ? 'Cliente: ' : p.nome + ': ') + m.t).join('\n');
+    const input = 'Você é ' + p.nome + ', ' + p.oficio + ' em Tupã (SP). Você oferece: ' + p.servicos.map((x) => x.t).join(', ') + '. Seu preço começa em ' + p.preco + ' e atende em ' + p.bairro + '. Responda como uma mensagem de WhatsApp: curta (1 a 3 frases), simpática e em português do Brasil, sem emojis. Não invente telefones nem endereços. Se perguntarem o valor, dê um número próximo ao seu preço inicial e diga que confirma depois de ver o serviço. Responda apenas como o profissional.\n\nConversa:\n' + hist + '\n\nResponda à última mensagem do cliente.';
+    const ai = await this.sampleText(input);
+    if (!ai) await new Promise((r) => setTimeout(r, 1000));
+    const quer = /valor|quanto|preco|orcamento/.test(this.nz(text));
+    if (tok !== this._tok) return;
+    const nxt = [...this._chat, { de:'p', t: ai || this.fallbackChat(text, p), h:this.hora(), deal:quer, valor:p.preco }];
+    this._chat = nxt;
+    this.setState({ chat:nxt, typing:false });
+    } catch (err) { this.setState({ typing:false }); }
+    finally { this._busy = false; this.toEnd('chatend'); this.restore('chatinp', this._wantFocus); }
+  }
+  renderVals() {
+    const st = this.state;
+    const set = (o) => () => this.setState(o);
+    const keep = (e) => { if (e && e.preventDefault) e.preventDefault(); };
+    const nz = (t) => this.nz(t);
+    const D = `Reformas e construção;Carlos Almeida;Pedreiro;Alvenaria|Reboco|Pisos e azulejos;4,9;41;R$ 150;Centro
+Reformas e construção;Rogério Faria;Pintor;Pintura interna|Textura e grafiato|Massa corrida;4,8;27;R$ 120;Vila Jardim
+Reformas e construção;Edson Barros;Eletricista;Instalação elétrica|Chuveiro e tomadas|Quadro de luz;4,7;33;R$ 90;Toda a cidade
+Casa e limpeza;Marlene Costa;Diarista;Limpeza pesada|Passar roupa|Limpeza pós-obra;4,9;52;R$ 110;Centro
+Casa e limpeza;Paulo Nunes;Jardineiro;Corte de grama|Poda|Limpeza de terreno;4,6;18;R$ 80;Jardim América
+Casa e limpeza;Sueli Ramos;Dedetizadora;Baratas e formigas|Cupins|Caixa d'água;4,8;24;R$ 140;Toda a cidade
+Reparos;Fábio Teixeira;Técnico em eletrodomésticos;Máquina de lavar|Geladeira|Micro-ondas;4,8;36;R$ 70;Centro
+Reparos;Jonas Pires;Ar-condicionado;Instalação|Limpeza|Carga de gás;4,7;29;R$ 130;Toda a cidade
+Reparos;Diego Moura;Celular e informática;Troca de tela|Formatação|Redes e Wi-Fi;4,9;61;R$ 60;Vila Jardim
+Automotivo;Wagner Silva;Mecânico;Revisão|Freios e suspensão|Troca de óleo;4,8;44;R$ 100;Jardim América
+Automotivo;Léo Santana;Funilaria e pintura;Reparo de lataria|Polimento|Pintura;4,7;19;R$ 250;Centro
+Automotivo;Ivan Rocha;Lava-jato a domicílio;Lavagem completa|Higienização|Cristalização;4,9;33;R$ 60;Toda a cidade
+Aulas e reforço;Helena Duarte;Professora de reforço;Matemática|Português|Ensino fundamental;4,9;47;R$ 50;Centro
+Aulas e reforço;Rafael Lopes;Professor de inglês;Conversação|Aulas particulares|Preparo para provas;4,8;22;R$ 60;Vila Jardim
+Aulas e reforço;Beatriz Alves;Professora de música;Violão|Teclado|Canto;4,7;15;R$ 55;Centro
+Beleza e bem-estar;Camila Freitas;Cabeleireira;Corte e escova|Coloração|Hidratação;4,9;58;R$ 60;Centro
+Beleza e bem-estar;Patrícia Gomes;Manicure;Unhas em gel|Pedicure|Atende em casa;4,8;39;R$ 40;Jardim América
+Beleza e bem-estar;Renato Dias;Massagista;Massagem relaxante|Massagem terapêutica|Drenagem;4,7;17;R$ 90;Vila Jardim
+Eventos;Tânia Martins;Buffet e doces;Salgados|Bolos|Mesa de doces;4,9;31;R$ 300;Centro
+Eventos;Gustavo Reis;Fotógrafo;Festas|Ensaios|Cobertura de eventos;4,8;26;R$ 350;Toda a cidade
+Eventos;Eduardo Cunha;DJ e som;Som e iluminação|DJ para festas|Telão;4,6;14;R$ 400;Jardim América
+Fretes e mudanças;Antônio Brito;Frete e mudança;Mudanças|Entrega de móveis|Pequenos fretes;4,8;48;R$ 120;Toda a cidade
+Fretes e mudanças;Valdir Cruz;Caminhão baú;Mudança completa|Entre cidades|Ajudantes;4,7;20;R$ 280;Centro
+Fretes e mudanças;Sérgio Matos;Carreto;Eletrodomésticos|Material de construção|Entulho;4,6;16;R$ 80;Vila Jardim`;
+    const all = {};
+    const DM = { 'Centro':['a 1,2 km',1.2], 'Vila Jardim':['a 2,8 km',2.8], 'Jardim América':['a 3,5 km',3.5], 'Toda a cidade':['atende toda a cidade',5] };
+    D.split('\n').forEach((l) => {
+      const [cat, nome, oficio, sv, nota, aval, preco, bairro] = l.split(';');
+      const w = nome.split(' ');
+      (all[cat] = all[cat] || []).push({ cat, nome, oficio, nota, aval, preco, bairro, ini: w[0][0] + w[w.length - 1][0], dist: DM[bairro] ? DM[bairro][0] : '', dnum: DM[bairro] ? DM[bairro][1] : 9, servicos: sv.split('|').map((t) => ({ t })) });
+    });
+    all['Pet e animais'] = [];
+    const flat = Object.values(all).flat();
+    const num = (p) => parseInt(p.preco.replace(/\D/g, ''), 10);
+    const nt = (p) => parseFloat(p.nota.replace(',', '.'));
+    const catAtual = all[st.cat] ? st.cat : 'Reformas e construção';
+    const verFn = (p) => () => this.setState({ screen:'perfil', selNome:p.nome, q:'' });
+    const chatFn = (nome, back) => () => {
+      const init = [{ de:'p', t:'Olá! Vi que você quer um serviço. Como posso ajudar?', h:this.hora() }];
+      this._chat = init; this._tok = (this._tok || 0) + 1; this._busy = false; this._wantFocus = false; this._draft = {};
+      this.setState({ screen:'chat', chatNome:nome, chatBack:back, typing:false, chat:init });
+    };
+    const comH = (p) => ({ ...p, ver: verFn(p), pedir: set({ screen:'pedido', cat:p.cat, para:p.nome }), favTxt: st.favs[p.nome] ? 'Remover dos favoritos' : 'Favoritar', favFill: st.favs[p.nome] ? 'currentColor' : 'none', favGo: () => { this.flash(st.favs[p.nome] ? 'Removido dos favoritos.' : p.nome + ' foi para os favoritos.'); this.setState({ favs:{ ...st.favs, [p.nome]: !st.favs[p.nome] } }); } });
+    let lista = all[catAtual].slice();
+    if (st.sort === 'nota') lista.sort((a, b) => nt(b) - nt(a));
+    if (st.sort === 'preco') lista.sort((a, b) => num(a) - num(b));
+    if (st.sort === 'perto') lista.sort((a, b) => a.dnum - b.dnum);
+    lista = lista.map(comH);
+    const filtros = [['todos','Todos'],['perto','Mais perto'],['nota','Melhor nota'],['preco','Menor preço']].map(([k, t]) => ({ t, pick:set({ sort:k }), bg: st.sort === k ? '#115E59' : '#fff', cor: st.sort === k ? '#fff' : '#115E59' }));
+    const sel = flat.find((p) => p.nome === st.selNome) || flat[0];
+    const icones = {
+      'Reformas e construção':'M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.5-.5-.5-2.5z',
+      'Casa e limpeza':'M3 11l9-8 9 8M5 10v10h14V10M10 20v-6h4v6',
+      'Reparos':'M13 2L4 14h7l-1 8 9-12h-7z',
+      'Automotivo':'M5 16v-5l2-5h10l2 5v5M3 16h18M7 19v-3M17 19v-3',
+      'Aulas e reforço':'M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM8 7h8',
+      'Beleza e bem-estar':'M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z',
+      'Eventos':'M4 6h16v14H4zM4 10h16M8 3v4M16 3v4',
+      'Fretes e mudanças':'M2 7h11v9H2zM13 10h4l3 3v3h-7M6 18.5h.01M17 18.5h.01',
+      'Pet e animais':'M12 14c-2.5 0-4.5 2-4.5 4 0 1.5 1.5 2.5 4.5 2.5s4.5-1 4.5-2.5c0-2-2-4-4.5-4zM6.5 10h.01M17.5 10h.01M9.5 6.5h.01M14.5 6.5h.01'
+    };
+    const cats = Object.keys(icones).map((nome) => ({ nome, d:icones[nome], pick:set({ screen:'lista', cat:nome, para:null, sort:'todos' }) }));
+    const buscando = nz(st.q).length >= 2;
+    const res = buscando ? flat.filter((p) => nz([p.nome, p.oficio, p.cat, p.servicos.map((s) => s.t).join(' ')].join(' ')).includes(nz(st.q))).map(comH) : [];
+    const orcOrder = st.pedidos.find((o) => o.id === st.ativo);
+    const orcCat = orcOrder ? orcOrder.cat : catAtual;
+    const orcList = (all[orcCat] || []).map((p) => ({ ...comH(p), aceitar: () => { this.flash('Proposta aceita! Combine os detalhes pelo chat.'); this.setState({ pedidos: st.pedidos.map((o) => o.id === st.ativo ? { ...o, status:'contratado', prof:p.nome, valor:p.preco } : o), screen:'meus' }); } }));
+    const agendas = ['Amanhã de manhã','Amanhã à tarde','Sábado de manhã'];
+    const upd = (id, patch) => st.pedidos.map((x) => x.id === id ? { ...x, ...patch } : x);
+    const ped = st.pedidos.map((o) => ({ ...o, titulo: o.cat + (o.para ? ' · ' + o.para : ''),
+      label: o.status === 'orcamentos' ? '3 orçamentos recebidos' : o.status === 'contratado' ? 'Contratado: ' + o.prof + ' · ' + o.valor + ' · falta pagar' : o.status === 'pago' ? 'Pago e retido (' + o.valor + ')' + (o.agenda ? ' · ' + o.agenda : '') : o.status === 'problema' ? 'Garantia acionada: a equipe retorna em até 24 h' : 'Avaliado com nota ' + o.nota + ' · pagamento liberado',
+      a: o.status === 'orcamentos', b: o.status === 'contratado', p: o.status === 'pago', prob: o.status === 'problema', c: o.status === 'avaliado',
+      suporte: set({ screen:'suporte' }), recontratar: set({ screen:'pedido', cat:o.cat, para:o.prof || null }),
+      verOrc: set({ screen:'orc', ativo:o.id }), chatar: chatFn(o.prof, 'meus'), concluir: set({ screen:'aval', ativo:o.id, nota:0 }),
+      pagar: () => { this.flash('Pagamento por Pix feito. O valor fica retido até você confirmar o serviço.'); this.setState({ pedidos: upd(o.id, { status:'pago' }) }); },
+      problema: () => { this.flash('Garantia acionada. A equipe vai refazer o serviço ou devolver o valor.'); this.setState({ pedidos: upd(o.id, { status:'problema' }), admDen: (st.admDen || 0) + 1 }); },
+      agendas: agendas.map((t) => ({ t, go: () => { this.flash('Serviço agendado: ' + t + '. Você receberá um lembrete.'); this.setState({ pedidos: upd(o.id, { agenda:t }) }); } })) }));
+    const estrelas = [1,2,3,4,5].map((n) => ({ n, pick:set({ nota:n }), bg: st.nota >= n ? '#FEF3C7' : '#fff', borda: st.nota >= n ? '#F59E0B' : '#B5D3CE' }));
+    const chatP = flat.find((p) => p.nome === st.chatNome) || flat[0];
+    const msgs = st.chat.map((m, i) => ({ t:m.t, h:m.h || '', al: m.de === 'eu' ? 'flex-end' : 'flex-start', bg: m.de === 'eu' ? '#115E59' : '#E6F1EF', cor: m.de === 'eu' ? '#fff' : '#0F2A27',
+      dealAberta: !!m.deal && !m.aceito, aceito: !!m.aceito, valor:m.valor || '',
+      aceitar: () => { this.flash('Proposta aceita! Combine os detalhes por aqui.'); const nxt = this.getChat().map((x, j) => j === i ? { ...x, aceito:true } : x).concat([{ de:'eu', t:'Aceito a proposta inicial de ' + m.valor + '.', h:this.hora() }]); this._chat = nxt; this.setState({ chat:nxt }); this.toEnd('chatend'); } }));
+    const quick = ['Qual o valor?','Pode vir amanhã?','Enviei uma foto do serviço.','Estou no Centro. Atende aqui?','Combinado!'];
+    const respostas = quick.map((t) => ({ t, go: (e) => { this._wantFocus = false; this.chatSend(t, chatP, e); }, keep }));
+    const vals = ['R$ 120','R$ 180','R$ 250'];
+    const ppeds = [
+      { id:'a', titulo:'Instalar chuveiro elétrico', info:'Jardim América · para amanhã', custo:2, nota:'' },
+      { id:'b', titulo:'Pintar sala e corredor', info:'Centro · esta semana', custo:1, nota:'Preço reduzido: outros profissionais já viram' },
+      { id:'c', titulo:'Limpeza pós-obra', info:'Vila Jardim · sábado', custo:2, nota:'' }
+    ].map((q) => { const ab = !!st.abertos[q.id]; return { ...q, devolvido: !!st.denunc[q.id], podeDen: ab && !st.denunc[q.id], denunciar: () => { this.flash('Denúncia enviada. Crédito devolvido automaticamente.'); this.ext('Devolução: pedido falso', '+' + q.custo); this.setState({ denunc:{ ...st.denunc, [q.id]:true }, creditos: st.creditos + q.custo, admDen: (st.admDen || 0) + 1 }); }, desc: !!q.nota, aberto: ab, fechado: !ab, semEnv: ab && !st.env[q.id], temEnv: !!st.env[q.id], enviado: st.env[q.id],
+      btn: st.creditos >= q.custo ? 'Liberar contato · ' + q.custo + (q.custo === 1 ? ' crédito' : ' créditos') : 'Créditos insuficientes · comprar',
+      abrir: () => st.creditos >= q.custo ? (this.flash('Contato liberado! ' + q.custo + ' crédito(s) usado(s).'), this.ext('Contato liberado: ' + q.titulo, '-' + q.custo), this.setState({ abertos:{ ...st.abertos, [q.id]:true }, creditos: st.creditos - q.custo })) : this.setState({ screen:'pcred' }),
+      vals: vals.map((t) => ({ t:'Enviar ' + t, go: () => { this.flash('Orçamento enviado ao cliente.'); this.setState({ env:{ ...st.env, [q.id]:t } }); } })) }; });
+    const pks = [{ id:'p1', nome:'Básico', cred:10, preco:'R$ 29', tag:'' }, { id:'p2', nome:'Popular', cred:25, preco:'R$ 59', tag:'Mais escolhido' }, { id:'p3', nome:'Profissional', cred:60, preco:'R$ 119', tag:'Melhor custo' }];
+    const pacotes = pks.map((k) => ({ ...k, comprar: set({ pix:k.id, pixMsg:'' }) }));
+    const pkSel = pks.find((k) => k.id === st.pix);
+    const etp = [['doc','Foto do documento (RG ou CNH)'],['selfie','Selfie para conferir sua identidade'],['cats','Categorias e serviços que você oferece'],['bairros','Bairros que você atende']];
+    const done = (k) => k === 'cats' ? Object.keys(st.cats || {}).some((x) => st.cats[x]) : k === 'bairros' ? Object.keys(st.bairros || {}).some((x) => st.bairros[x]) : !!st.etapas[k];
+    const feitas = etp.filter(([k]) => done(k)).length;
+    const tg = (key, name) => () => this.setState({ [key]: { ...(st[key] || {}), [name]: !(st[key] || {})[name] } });
+    const chipsOf = (key, names) => names.map((t) => ({ t, bg: (st[key] || {})[t] ? '#CCFBF1' : '#fff', go: tg(key, t) }));
+    const pcats = chipsOf('cats', Object.keys(icones));
+    const pbairros = chipsOf('bairros', ['Centro','Vila Jardim','Jardim América','Toda a cidade']);
+    const praios = [3, 5, 10].map((n) => ({ t: n + ' km', bg: st.raio === n ? '#CCFBF1' : '#fff', go: set({ raio:n }) }));
+    const pfaixas = ['Até R$ 80','R$ 80 a R$ 150','Acima de R$ 150'].map((t) => ({ t, bg: st.faixa === t ? '#CCFBF1' : '#fff', go: set({ faixa:t }) }));
+    const etapas = etp.map(([k, t]) => ({ t, pill: done(k) ? 'Concluído' : (k === 'cats' || k === 'bairros' ? 'Escolher abaixo' : 'Enviar'), bg: done(k) ? '#DCFCE7' : '#EFF7F5', cor: done(k) ? '#166534' : '#115E59', tog: (k === 'cats' || k === 'bairros') ? () => this.flash('Escolha as opções logo abaixo.') : set({ etapas:{ ...st.etapas, [k]: !st.etapas[k] } }) }));
+    const bens = [{ t:'Academia ConectaJa', d:'Mini-cursos para atrair mais clientes e precificar melhor.' }, { t:'Clube ConectaJa', d:'Descontos em lojas parceiras de Tupã.' }, { t:'Suporte rápido', d:'Atendimento por chat para tirar dúvidas.' }];
+    const sair = ['Sair', 'login', 'M9 21H5V3h4M16 17l5-5-5-5M21 12H9'];
+    const L = 'M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01';
+    const M = 'M4 6h16M4 12h16M4 18h16';
+    const tabs = st.role === 'prestador'
+      ? [['Pedidos','phome',L],['Créditos','pcred','M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18M12 7v10'],['Perfil','pperfil','M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8M4 21a8 8 0 0 1 16 0'],['Menu','menu',M], sair]
+      : [['Início','home','M3 11l9-8 9 8M5 10v10h14V10'],['Pedidos','meus',L],['Menu','menu',M], sair];
+    const nav = tabs.map(([rotulo, sc, d]) => ({ rotulo, d, go: set({ screen:sc }), cor: st.screen === sc ? '#115E59' : '#6B7F7B', peso: st.screen === sc ? '2.4' : '1.8' }));
+    const roles = [['cliente','Cliente','Preciso de um serviço','M3 11l9-8 9 8M5 10v10h14V10'],['prestador','Prestador','Quero oferecer meus serviços','M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.5-.5-.5-2.5z']]
+      .map(([id, nome, sub, d]) => ({ nome, sub, d, pick:set({ role:id }), bg: st.role === id ? '#CCFBF1' : '#fff', borda: st.role === id ? '#115E59' : '#D5E8E4', marca: st.role === id ? 'Selecionado' : '' }));
+    const pres = st.role === 'prestador';
+    const infoMap = {
+      termos: { t:'Termos de uso', b:[{ h:'O que é o ConectaJa', p:'O ConectaJa conecta clientes e prestadores de serviço de Tupã. Ele não executa os serviços: quem executa é o profissional.' }, { h:'Cadastro e verificação', p:'Prestadores enviam documento e selfie e só aparecem para clientes depois de verificados.' }, { h:'Créditos e pagamentos', p:'Pedir orçamento é grátis para o cliente. O prestador usa créditos para liberar contatos. O pagamento protegido retém o valor até o cliente confirmar o serviço.' }, { h:'Cancelamento', p:'Cancelamento grátis até 24 h antes do serviço. Depois, pode haver taxa combinada antes do aceite.' }, { h:'Responsabilidades', p:'A garantia cobre refazer o serviço ou devolver o valor nos casos previstos nas Regras do app.' }] },
+      privacidade: { t:'Política de privacidade (LGPD)', b:[{ h:'Quais dados coletamos', p:'Nome, celular, bairro e histórico de pedidos. Dos prestadores, também documento e selfie para verificação.' }, { h:'Para que usamos', p:'Para conectar clientes e prestadores, verificar perfis, processar pagamentos e prestar suporte.' }, { h:'Com quem compartilhamos', p:'O contato do cliente só é liberado para até 3 profissionais, depois do pedido. Não vendemos seus dados.' }, { h:'Seus direitos', p:'Você pode pedir acesso, correção ou exclusão dos seus dados a qualquer momento, em Menu, Excluir minha conta, ou pelo suporte.' }, { h:'Segurança', p:'Documentos e selfies ficam em armazenamento protegido, com acesso restrito à equipe de verificação.' }] },
+      regras: { t:'Regras do app', b:[{ h:'Garantia', p:'O pagamento fica retido até você confirmar o serviço. Se der problema, toque em Relatar problema: a equipe responde em até 24 h e refaz o serviço ou devolve o valor.' }, { h:'Créditos do prestador', p:'Valem por 12 meses. Voltam automaticamente se o cliente não responder em 48 h, ou em pedido falso, de teste, duplicado ou já fechado.' }, { h:'Cancelamento', p:'Grátis até 24 h antes. Depois, só com taxa combinada antes do aceite.' }, { h:'Avaliações', p:'Só quem contratou pode avaliar. A equipe modera avaliações abusivas.' }, { h:'Denúncias', p:'Você pode denunciar perfis e pedidos. A equipe analisa e pode suspender contas.' }] },
+      sobre: { t:'Sobre o ConectaJa', b:[{ h:'O que é', p:'Um aplicativo de serviços feito para Tupã e região, com profissionais verificados em várias categorias.' }, { h:'Como funciona', p:'O cliente pede um orçamento grátis, recebe até 3 propostas, combina, paga com segurança e avalia.' }, { h:'Como o app ganha dinheiro', p:'O prestador compra créditos para liberar o contato dos pedidos. Para o cliente, o app é grátis.' }, { h:'Segurança', p:'Verificação de documento e selfie, avaliações de quem contratou, denúncia, garantia e suporte humano.' }, { h:'Versão', p:'Protótipo de demonstração. Nomes, preços e pagamentos são simulados.' }] }
+    };
+    const titulos = { login:'Bem-vindo ao ConectaJa', home:'Olá! O que você precisa hoje?', lista:catAtual, perfil:'Perfil do profissional', pedido:'Novo pedido', meus:'Meus pedidos', orc:'Orçamentos recebidos', chat: st.chatNome || 'Conversa', aval:'Avaliar serviço', notif:'Notificações', suporte:'Suporte', adm:'Painel da equipe', onb:'Bem-vindo', codigo:'Confirme seu número', menu:'Menu', info:(infoMap[st.infoKey] || infoMap.sobre).t, favs:'Favoritos', recibos:'Recibos e pagamentos', indique:'Indique e ganhe', phome:'Pedidos para você', pcred:'Meus créditos', pperfil:'Meu perfil de prestador' };
+    const backMap = { lista:'home', perfil:'lista', pedido:'lista', orc:'meus', chat: st.chatBack || 'meus', aval:'meus', notif: pres ? 'phome' : 'home', suporte: pres ? 'phome' : 'home', adm:'login', info:'menu', favs:'menu', recibos:'menu', indique:'menu', menu: pres ? 'phome' : 'home', codigo:'login' };
+    const pergCli = ['Como funciona a garantia?','Como funciona o app?','Como peço um serviço?','Quanto custa para o cliente?','O profissional é confiável?','Como avalio um serviço?','Como denuncio um perfil?'];
+    const pergPre = ['Como libero um contato?','O que são créditos?','Como me verifico?','O crédito pode voltar?','Como envio orçamento?'];
+    const perguntas = (st.role === 'prestador' ? pergPre : pergCli).map((t) => ({ t, go: (e) => { this._wantA = false; this.ask(t, e); }, keep }));
+    const amsgs = st.amsgs.map((m) => ({ t:m.t, al: m.de === 'eu' ? 'flex-end' : 'flex-start', bg: m.de === 'eu' ? '#115E59' : '#E6F1EF', cor: m.de === 'eu' ? '#fff' : '#0F2A27' }));
+    if (st.atyp) amsgs.push({ t:'Digitando...', al:'flex-start', bg:'#E6F1EF', cor:'#456461' });
+    const sc = st.screen;
+    const dest = pres ? (st.novo ? 'pperfil' : 'phome') : 'home';
+    const slides = pres ? [['Receba pedidos de Tupã','Veja novos pedidos da sua região e libere só os que valem a pena.'],['Pague só pelo contato','Use créditos. Em pedido falso ou duplicado, o crédito volta.'],['Construa sua reputação','Verificação e avaliações trazem mais clientes para você.']] : [['Peça em minutos','Escolha a categoria e descreva o serviço que você precisa.'],['Compare propostas','Receba até 3 orçamentos de profissionais de Tupã.'],['Pague com segurança','O valor só vai ao profissional quando você confirmar o serviço.']];
+    const sl = slides[Math.min(st.onb, 2)];
+    const ultimo = st.onb >= 2;
+    const dots = [0, 1, 2].map((i) => ({ bg: i === st.onb ? '#115E59' : '#B5D3CE' }));
+    const abrirInfo = (k) => set({ screen:'info', infoKey:k });
+    const menuItems = [
+      ...(pres ? [{ t:'Extrato de créditos', d:'Compras, usos e devoluções', go:set({ screen:'pcred' }) }] : [{ t:'Favoritos', d:'Profissionais que você salvou', go:set({ screen:'favs' }) }, { t:'Recibos e pagamentos', d:'Histórico e comprovantes', go:set({ screen:'recibos' }) }]),
+      { t:'Indique e ganhe', d:'Convide amigos de Tupã', go:set({ screen:'indique' }) },
+      { t:'Falar com atendente', d:'Chat e WhatsApp, protocolo e prazo', go:set({ screen:'suporte' }) },
+      { t:'Termos de uso', d:'Regras de uso do app', go:abrirInfo('termos') },
+      { t:'Política de privacidade', d:'Seus dados e a LGPD', go:abrirInfo('privacidade') },
+      { t:'Regras do app', d:'Garantia, créditos e cancelamento', go:abrirInfo('regras') },
+      { t:'Sobre o ConectaJa', d:'Como funciona e como ganhamos dinheiro', go:abrirInfo('sobre') },
+      { t:'Texto maior', d:'Aumenta o tamanho das telas', val: st.grande ? 'Ligado' : 'Desligado', go:set({ grande: !st.grande }) },
+      { t:'Simular sem internet', d:'Mostra o aviso de conexão', val: st.offline ? 'Ligado' : 'Desligado', go:set({ offline: !st.offline }) },
+      { t:'Excluir minha conta', d:'Remove seus dados (LGPD)', cor:'#B42318', go: () => { this.flash('Conta excluída (simulação). Seus dados seriam removidos conforme a LGPD.'); this.setState({ screen:'login', aceite:false, pedidos:[], favs:{}, visto:false }); } }
+    ].map((x) => ({ val:'', cor:'#0F2A27', ...x }));
+    const favList = flat.filter((p) => st.favs[p.nome]).map(comH);
+    const recs = st.pedidos.filter((o) => ['pago','avaliado','problema'].includes(o.status)).map((o) => ({ titulo: o.cat + (o.prof ? ' · ' + o.prof : ''), valor:o.valor, num:'CJ-R-' + (1000 + o.id), status: o.status === 'avaliado' ? 'Pagamento liberado ao profissional' : o.status === 'problema' ? 'Pagamento retido: garantia acionada' : 'Pago por Pix, retido até a confirmação', baixar: () => this.flash('Recibo CJ-R-' + (1000 + o.id) + ' baixado (simulação).') }));
+    const estrelasCli = [1, 2, 3, 4, 5].map((n) => ({ n, bg: st.avCli >= n ? '#FEF3C7' : '#fff', borda: st.avCli >= n ? '#F59E0B' : '#B5D3CE', go: () => { this.flash('Cliente avaliado com nota ' + n + '.'); this.setState({ avCli:n }); } }));
+    const assuntos = ['Pagamento','Cadastro','Denúncia','Outro'].map((t) => ({ t, bg: st.assunto === t ? '#CCFBF1' : '#fff', go: set({ assunto:t }) }));
+    const extras = {
+      s_notif: sc === 'notif', s_suporte: sc === 'suporte', s_adm: sc === 'adm',
+      notifs: st.notifs || [], semNotif: !(st.notifs || []).length, unread: st.unread || 0, temUnread: (st.unread || 0) > 0,
+      abrirNotif: () => this.setState({ screen:'notif', unread:0 }),
+      assuntos, protocolo: st.protocolo, temProt: !!st.protocolo,
+      abrirChamado: () => { const pr = 'CJ-2026-' + (1000 + st.seq + (st.notifs || []).length); this.setState({ protocolo:pr }); this.flash('Chamado aberto. Protocolo ' + pr + '.'); },
+      admAn: st.admAn, admDen: st.admDen, admRe: st.admRe,
+      admAprova: () => st.admAn > 0 ? (this.flash('Prestador aprovado.'), this.setState({ admAn: st.admAn - 1 })) : null,
+      admResolve: () => st.admDen > 0 ? (this.flash('Denúncia resolvida.'), this.setState({ admDen: st.admDen - 1 })) : null,
+      admReemb: () => st.admRe > 0 ? (this.flash('Reembolso aprovado.'), this.setState({ admRe: st.admRe - 1 })) : null,
+      irAdm: set({ screen:'adm' }), irSuporte: set({ ajuda:false, screen:'suporte' }),
+      togAceite: set({ aceite: !st.aceite }), aceiteAria: st.aceite ? 'true' : 'false', aceiteBg: st.aceite ? '#115E59' : '#fff', aceiteMarca: st.aceite ? '✓' : '',
+      addFoto: () => this.setState({ fotos: Math.min(4, (st.fotos || 0) + 1) }), fotosTxt: (st.fotos || 0) + '/4',
+      denunciar: () => { this.flash('Denúncia enviada para a equipe analisar.'); this.setState({ admDen: (st.admDen || 0) + 1 }); },
+      extrato: st.extrato || [],
+      s_onb: sc === 'onb', s_codigo: sc === 'codigo', s_menu: sc === 'menu', s_info: sc === 'info', s_favs: sc === 'favs', s_recibos: sc === 'recibos', s_indique: sc === 'indique',
+      slTitle: sl[0], slText: sl[1], dots, onbBtn: ultimo ? 'Começar' : 'Próximo',
+      onbNext: () => ultimo ? this.setState({ screen:dest, visto:true }) : this.setState({ onb: st.onb + 1 }),
+      onbSkip: set({ screen:dest, visto:true }),
+      confCod: () => this.setState({ screen: st.visto ? dest : 'onb', onb:0 }),
+      reenviar: () => this.flash('Novo código enviado por SMS.'),
+      esqueci: () => this.flash('Enviamos um código por SMS para redefinir a senha.'),
+      menuItems, infoBlocks: (infoMap[st.infoKey] || infoMap.sobre).b,
+      favList, semFavs: favList.length === 0, recs, semRec: recs.length === 0,
+      selFav: () => comH(sel).favGo(), selFavTxt: comH(sel).favTxt,
+      copiar: () => this.flash('Código CONECTA-TUPA copiado.'), compartilhar: () => this.flash('Abrindo o WhatsApp para compartilhar (simulação).'),
+      listaTxt: lista.length ? lista.length + ' profissionais em Tupã · ordene como preferir' : 'Em breve nesta categoria', semProf: lista.length === 0,
+      avisar: () => { this.flash('Combinado! Avisaremos quando houver profissionais em ' + catAtual + '.'); this.setState({ avisos:{ ...st.avisos, [catAtual]: true } }); },
+      avisarTxt: st.avisos[catAtual] ? 'Aviso ativado' : 'Avise-me',
+      semRes: buscando && res.length === 0, offline: st.offline, zoomV: st.grande ? '1.12' : '1',
+      pcats, pbairros, praios, pfaixas, estrelasCli,
+      respondido: st.respondido, naoRespondido: !st.respondido, responder: () => { this.flash('Resposta enviada ao cliente.'); this.setState({ respondido:true }); }
+    };
+    return {
+      titulo: titulos[sc], showBack: !!backMap[sc], voltar: set({ screen: backMap[sc] || 'home' }), showNav: !['login','adm','onb','codigo'].includes(sc), fabBottom: ['login','adm','onb','codigo'].includes(sc) ? '20px' : '84px',
+      s_login: sc === 'login', s_home: sc === 'home', s_lista: sc === 'lista', s_perfil: sc === 'perfil', s_pedido: sc === 'pedido', s_meus: sc === 'meus', s_orc: sc === 'orc', s_chat: sc === 'chat', s_aval: sc === 'aval', s_phome: sc === 'phome', s_pcred: sc === 'pcred', s_pperfil: sc === 'pperfil',
+      ...extras,
+      roles, roleNome: pres ? 'prestador' : 'cliente', roleDica: pres ? 'Cadastro com verificação de documento. Primeiros meses grátis.' : 'Pedir orçamento é grátis para o cliente.',
+      entrar: () => st.aceite ? this.setState({ screen:'codigo', novo:false, notifs:[], unread:0 }) : this.flash('Marque o aceite dos termos para continuar.'), criar: () => st.aceite ? this.setState({ screen:'codigo', novo:true, notifs:[], unread:0 }) : this.flash('Marque o aceite dos termos para continuar.'),
+      buscaTxt: st.q, onBusca: (e) => this.typed(e, 'q', 'buscainp'), buscando, res, nRes: res.length, cats, filtros, lista, sel, catAtual,
+      selPedir: set({ screen:'pedido', cat:sel.cat, para:sel.nome }), selChat: chatFn(sel.nome, 'perfil'),
+      paraTxt: st.para ? 'Para: ' + st.para : 'Para: até 3 profissionais da categoria',
+      enviar: () => { this.flash('Pedido enviado! Em instantes chegam os orçamentos.'); this.setState({ pedidos:[...st.pedidos, { id:st.seq, cat:catAtual, para:st.para, status:'orcamentos', prof:'', valor:'', nota:0 }], seq: st.seq + 1, screen:'meus', para:null, fotos:0 }); },
+      semPedidos: st.pedidos.length === 0, irHome: set({ screen:'home' }), ped, orcList, msgs, respostas, estrelas, chatP, typing: st.typing, typingTxt: chatP.nome + ' está digitando...', ctxt: st.ctxt, onCtxt: (e) => this.draft(e, 'chatinp'), enviarChat: (e) => this.sendChat(chatP, e), chatKey: (e) => { if (e.key === 'Enter') { e.preventDefault(); this.sendChat(chatP, e); } }, chatFocus: (e) => { this.root(e); this.toEnd('chatend'); }, keep, temToast: !!st.toast, toast: st.toast,
+      notaTxt: st.nota ? 'Você deu nota ' + st.nota + ' de 5.' : 'Toque nas estrelas para avaliar.', avalBtn: st.nota ? 'Enviar avaliação' : 'Escolha uma nota',
+      enviarAval: () => st.nota ? (this.flash('Obrigado pela avaliação! Pagamento liberado ao profissional.'), this.setState({ pedidos: st.pedidos.map((o) => o.id === st.ativo ? { ...o, status:'avaliado', nota:st.nota } : o), screen:'meus' })) : null,
+      creditos: st.creditos, irCred: set({ screen:'pcred' }), ppeds, pacotes, showPix: !!st.pix, temPixMsg: !!st.pixMsg, pixMsg: st.pixMsg,
+      simular: () => pkSel ? (this.flash('Pagamento confirmado!'), this.ext('Compra: pacote ' + pkSel.nome, '+' + pkSel.cred), this.setState({ creditos: st.creditos + pkSel.cred, pix:null, pixMsg:'Pagamento confirmado! +' + pkSel.cred + ' créditos na sua carteira.' })) : null,
+      etapas, prog: Math.round(feitas / 4 * 100) + '%', bens,
+      statusTxt: st.cadastro === 'verificado' ? 'Verificado' : st.cadastro === 'analise' ? 'Em análise' : feitas + ' de 4 etapas',
+      cadRasc: st.cadastro === 'rascunho', cadAnal: st.cadastro === 'analise', cadVer: st.cadastro === 'verificado',
+      cadBtn: feitas === 4 ? 'Enviar para análise' : 'Faltam ' + (4 - feitas) + ' etapa(s)',
+      enviarCad: () => feitas === 4 ? this.setState({ cadastro:'analise' }) : null, aprovar: () => { this.flash('Perfil verificado!'); this.setState({ cadastro:'verificado' }); },
+      nav, abrirAjuda: set({ ajuda:true }), fecharAjuda: set({ ajuda:false }), ajudaAberta: st.ajuda, amsgs, perguntas, atxt: st.atxt,
+      onAtxt: (e) => this.draft(e, 'ajudainp'), enviarAjuda: (e) => this.sendAjuda(e), ajudaKey: (e) => { if (e.key === 'Enter') { e.preventDefault(); this.sendAjuda(e); } }, ajudaFocus: (e) => { this.root(e); this.toEnd('aend'); }
+    };
+  }
+}
+</script>
+
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then((registration) => {
+            console.log('[PWA] Service Worker registrado com sucesso no escopo:', registration.scope);
+          })
+          .catch((error) => {
+            console.warn('[PWA] Falha ao registrar Service Worker:', error);
+          });
+      });
+    }
+
+    // PWA Install Prompt Capture (Optional helper)
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      console.log('[PWA] App pronto para instalação');
+    });
+  </script>
+</body>
+</html>
