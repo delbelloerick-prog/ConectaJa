@@ -27,7 +27,7 @@
   <link rel="alternate icon" type="image/png" href="./icons/icon-192.png">
   <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
 
-  <!-- Responsive & PWA Styles -->
+  <!-- Full Responsive & PWA Styles -->
   <style>
     * {
       margin: 0;
@@ -40,75 +40,98 @@
       height: 100%;
       min-height: 100vh;
       min-height: 100dvh;
-      background: #091a18;
+      background: #EFF7F5;
+      color: #0F2A27;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      overflow-x: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
     }
-    #dc-root {
+    #dc-root, #dc-root > .sc-host {
       width: 100%;
       height: 100%;
+      min-height: 100vh;
+      min-height: 100dvh;
       display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    #dc-root > .sc-host {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      flex-direction: column;
       position: relative;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+      background: #EFF7F5;
     }
     .pwa-app-container {
-      width: 100%;
-      max-width: 480px;
-      height: 100vh;
-      height: 100dvh;
-      max-height: 940px;
-      margin: 0 auto;
-      border-radius: 0;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+      width: 100% !important;
+      max-width: 100% !important;
+      height: 100% !important;
+      height: 100vh !important;
+      height: 100dvh !important;
+      min-height: 100vh !important;
+      min-height: 100dvh !important;
+      max-height: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border-radius: 0 !important;
+      border: none !important;
+      box-shadow: none !important;
       position: relative;
       display: flex;
       flex-direction: column;
       overflow: hidden;
+      background: #EFF7F5;
     }
-    @media (min-width: 601px) and (min-height: 600px) {
-      body {
-        background: radial-gradient(circle at top, #133a36 0%, #081716 100%);
-      }
-      .pwa-app-container {
-        border-radius: 28px;
-        height: min(900px, 94vh);
-        overflow: hidden;
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.06);
-      }
+    .app-header-box {
+      width: 100%;
+      background: linear-gradient(135deg, #0F4F4B 0%, #0D9488 100%);
+      color: #fff;
+      padding: max(16px, env(safe-area-inset-top, 16px)) 20px 20px;
+      border-radius: 0 0 24px 24px;
+      box-shadow: 0 4px 18px rgba(15, 79, 75, 0.15);
+      flex: none;
+      box-sizing: border-box;
     }
-    @media (max-width: 600px) {
-      body {
-        background: #EFF7F5;
-      }
-      .pwa-app-container {
-        max-width: 100% !important;
-        width: 100% !important;
-        height: 100vh !important;
-        height: 100dvh !important;
-        max-height: 100% !important;
-        box-shadow: none !important;
-        border-radius: 0 !important;
-        border: none !important;
-      }
+    .app-header-inner {
+      max-width: 720px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
-    @media (max-height: 560px) {
-      .pwa-app-container {
-        height: 100% !important;
-        max-height: 100% !important;
-        border-radius: 0 !important;
-      }
+    .app-scroll-area {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 16px 20px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .app-scroll-area > * {
+      max-width: 720px;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      box-sizing: border-box;
+    }
+    .app-nav-box {
+      width: 100%;
+      background: #fff;
+      border-top: 1px solid #D5E8E4;
+      padding: 6px 12px max(12px, env(safe-area-inset-bottom, 12px));
+      flex: none;
+      box-sizing: border-box;
+      box-shadow: 0 -2px 10px rgba(17, 94, 89, 0.05);
+    }
+    .app-nav-inner {
+      max-width: 720px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      gap: 4px;
     }
   </style>
 
@@ -414,9 +437,10 @@ button:focus-visible,input:focus-visible{outline:3px solid #F59E0B;outline-offse
 </div>
 </sc-if>
 
-<div style="box-sizing:border-box;display:flex;flex-direction:column;background:#EFF7F5;color:#0F2A27;overflow:hidden;position:relative" class="pwa-app-container" data-canvas-width="390" data-canvas-height="844" data-document-role="page" data-label="App clicável (cliente e profissional)">
+<div class="pwa-app-container" data-canvas-width="390" data-canvas-height="844" data-document-role="page" data-label="App clicável (cliente e profissional)">
 
-<div style="background:linear-gradient(135deg,#0F4F4B,#0D9488);color:#fff;padding:16px 20px 20px;border-radius:0 0 26px 26px;display:flex;flex-direction:column;gap:12px">
+<div class="app-header-box">
+<div class="app-header-inner">
 <div style="display:flex;align-items:center;justify-content:space-between">
 <div style="display:flex;align-items:center;gap:10px">
 <sc-if value="{{showBack}}" hint-placeholder-val="{{ false }}">
@@ -439,9 +463,10 @@ button:focus-visible,input:focus-visible{outline:3px solid #F59E0B;outline-offse
 </div>
 <div style="font-size:21px;font-weight:700;letter-spacing:-.4px;line-height:1.2">{{titulo}}</div>
 </div>
+</div>
 
 <sc-if value="{{offline}}" hint-placeholder-val="{{ false }}"><div role="status" style="background:#B42318;color:#fff;text-align:center;font-size:12.5px;font-weight:600;padding:8px 12px">Sem conexão. Suas ações serão enviadas quando a internet voltar.</div></sc-if>
-<div style="flex:1;overflow:auto;padding:16px 20px 12px;display:flex;flex-direction:column;gap:14px;zoom:{{zoomV}}">
+<div class="app-scroll-area" style="zoom:{{zoomV}}">
 
 <sc-if value="{{s_login}}" hint-placeholder-val="{{ true }}">
 <div style="display:flex;flex-direction:column;align-items:center;text-align:center;padding:4px 0 8px">
@@ -882,7 +907,8 @@ button:focus-visible,input:focus-visible{outline:3px solid #F59E0B;outline-offse
 </div>
 
 <sc-if value="{{showNav}}" hint-placeholder-val="{{ true }}">
-<div style="display:flex;background:#fff;border-top:1px solid #D5E8E4;padding:6px 8px 14px;gap:2px">
+<div class="app-nav-box">
+<div class="app-nav-inner">
 <sc-for list="{{nav}}" as="n" hint-placeholder-count="4">
 <button sc-camel-on-click="{{n.go}}" style="flex:1;min-height:54px;border-radius:12px;background:#fff;color:{{n.cor}};font-size:11.5px;font-weight:600;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px">
 <svg width="22" height="22" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{n.peso}}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{n.d}}"></path></svg>
@@ -890,18 +916,19 @@ button:focus-visible,input:focus-visible{outline:3px solid #F59E0B;outline-offse
 </button>
 </sc-for>
 </div>
+</div>
 </sc-if>
 
 <sc-if value="{{temToast}}" hint-placeholder-val="{{ false }}">
-<div role="status" style="position:absolute;left:20px;right:20px;top:140px;z-index:15;background:#0F2A27;color:#fff;border-radius:14px;padding:12px 14px;font-size:13.5px;font-weight:600;box-shadow:0 8px 20px rgba(0,0,0,.25);animation:pop .25s ease both">{{toast}}</div>
+<div role="status" style="position:fixed;left:50%;transform:translateX(-50%);width:min(90%,600px);top:100px;z-index:9999;background:#0F2A27;color:#fff;border-radius:14px;padding:12px 16px;font-size:13.5px;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.35);text-align:center;animation:pop .25s ease both">{{toast}}</div>
 </sc-if>
 
-<button sc-camel-on-click="{{abrirAjuda}}" style="position:absolute;right:16px;bottom:{{fabBottom}};background:#115E59;color:#fff;border-radius:999px;min-height:48px;padding:0 16px;display:flex;align-items:center;gap:8px;font-weight:700;font-size:13.5px;box-shadow:0 6px 16px rgba(17,94,89,.35)">
+<button sc-camel-on-click="{{abrirAjuda}}" style="position:fixed;right:max(16px, calc(50% - 340px));bottom:{{fabBottom}};background:#115E59;color:#fff;border-radius:999px;min-height:48px;padding:0 16px;display:flex;align-items:center;gap:8px;font-weight:700;font-size:13.5px;box-shadow:0 6px 18px rgba(17,94,89,.4);z-index:18">
 <svg width="20" height="20" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"></path></svg>Ajuda IA</button>
 
 <sc-if value="{{ajudaAberta}}" hint-placeholder-val="{{ false }}">
-<div style="position:absolute;inset:0;background:rgba(15,42,39,.45);display:flex;flex-direction:column;justify-content:flex-end;z-index:20">
-<div style="background:#fff;border-radius:24px 24px 0 0;height:78%;display:flex;flex-direction:column;overflow:hidden">
+<div style="position:fixed;inset:0;background:rgba(15,42,39,.45);display:flex;flex-direction:column;justify-content:flex-end;align-items:center;z-index:9999">
+<div style="background:#fff;border-radius:24px 24px 0 0;height:78%;width:100%;max-width:720px;display:flex;flex-direction:column;overflow:hidden">
 <div style="background:#115E59;color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center">
 <span style="display:flex;flex-direction:column"><b style="font-size:16px">Assistente ConectaJa</b><span style="font-size:12px;opacity:.85">Tire dúvidas sobre o app</span></span>
 <button sc-camel-on-click="{{fecharAjuda}}" aria-label="Fechar" style="width:36px;height:36px;border-radius:12px;background:rgba(255,255,255,.18);color:#fff;display:flex;align-items:center;justify-content:center">
