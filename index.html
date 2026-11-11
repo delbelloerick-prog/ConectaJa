@@ -583,11 +583,28 @@ Toque para entrar
 </button>
 </sc-for>
 </div>
-<div class="card" style="display:flex;flex-direction:column;gap:8px">
-<label for="cel" class="lbl">Celular</label>
-<input id="cel" class="in" value="(14) 99999-0000">
-<label for="sen" class="lbl" style="margin-top:4px">Senha</label>
-<input id="sen" class="in" type="password" value="12345678">
+<div class="card" style="display:flex;flex-direction:column;gap:10px">
+<div>
+<label for="cel" class="lbl">Celular (com DDD)</label>
+<div style="position:relative;margin-top:4px">
+<input id="cel" class="in" type="tel" inputmode="tel" autocomplete="tel" placeholder="(14) 99999-0000" sc-camel-on-input="{{onCel}}" style="padding-left:40px">
+<span style="position:absolute;left:13px;top:50%;transform:translateY(-50%);color:#115E59;display:flex;align-items:center;pointer-events:none">
+<svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+</span>
+</div>
+</div>
+<div>
+<div style="display:flex;justify-content:space-between;align-items:center">
+<label for="sen" class="lbl">Senha de acesso</label>
+<button sc-camel-on-click="{{togSenha}}" type="button" style="background:transparent;color:#115E59;font-size:12px;font-weight:700;padding:0;cursor:pointer">{{verSenhaTxt}}</button>
+</div>
+<div style="position:relative;margin-top:4px">
+<input id="sen" class="in" type="{{senType}}" autocomplete="current-password" placeholder="Digite sua senha" sc-camel-on-input="{{onSen}}" style="padding-left:40px">
+<span style="position:absolute;left:13px;top:50%;transform:translateY(-50%);color:#115E59;display:flex;align-items:center;pointer-events:none">
+<svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+</span>
+</div>
+</div>
 </div>
 <button sc-camel-on-click="{{togAceite}}" role="checkbox" aria-checked="{{aceiteAria}}" style="background:transparent;display:flex;gap:10px;align-items:flex-start;text-align:left;color:#0F2A27;font-size:12.5px;line-height:1.4;padding:0">
 <span style="width:22px;height:22px;border-radius:7px;border:2px solid #115E59;background:{{aceiteBg}};color:#fff;display:flex;align-items:center;justify-content:center;flex:none;font-weight:700">{{aceiteMarca}}</span>
@@ -918,9 +935,9 @@ Toque para entrar
 <sc-if value="{{s_codigo}}" hint-placeholder-val="{{ false }}">
 <div class="card" style="display:flex;flex-direction:column;gap:10px">
 <b>Enviamos um código</b>
-<div class="mut">Digite o código de 4 dígitos enviado por SMS para (14) 99999-0000.</div>
-<label for="codinp" class="lbl">Código</label>
-<input id="codinp" class="in" inputmode="numeric" maxlength="4" value="1234" style="text-align:center;font-size:22px;letter-spacing:8px">
+<div class="mut">Digite o código de 4 dígitos enviado por SMS para {{celularExib}}.</div>
+<label for="codinp" class="lbl">Código de confirmação</label>
+<input id="codinp" class="in" inputmode="numeric" maxlength="4" placeholder="0000" sc-camel-on-input="{{onCod}}" style="text-align:center;font-size:22px;letter-spacing:8px">
 </div>
 <button class="btn" sc-camel-on-click="{{confCod}}">Confirmar</button>
 <button sc-camel-on-click="{{reenviar}}" style="background:transparent;color:#115E59;font-weight:700;min-height:44px">Reenviar código</button>
@@ -1057,7 +1074,7 @@ Toque para entrar
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { screen:'splash', role:'cliente', cat:'Reformas e construção', para:null, selNome:null, sort:'todos', q:'', pedidos:[], ativo:null, nota:0, chat:[], chatNome:'', ajuda:false,
+    this.state = { screen:'splash', role:'cliente', cat:'Reformas e construção', para:null, selNome:null, sort:'todos', q:'', pedidos:[], ativo:null, nota:0, chat:[], chatNome:'', ajuda:false, celular:'', senha:'', verSenha:false,
       amsgs:[{ de:'bot', t:'Oi! Sou o assistente do ConectaJa. Toque em uma pergunta ou escreva sua dúvida.' }], atxt:'', ctxt:'', typing:false, atyp:false, toast:'', aceite:false, onb:0, visto:false, novo:false, favs:{}, cats:{}, bairros:{}, raio:5, faixa:'', infoKey:'sobre', offline:false, grande:false, avCli:0, respondido:false, avisos:{}, notifs:[], unread:0, extrato:[{ t:'Bônus de boas-vindas', v:'+10' }], fotos:0, denunc:{}, admAn:3, admDen:2, admRe:1, assunto:'Pagamento', protocolo:'', creditos:10, abertos:{}, env:{}, pix:null, pixMsg:'',
       etapas:{ doc:false, selfie:false, cats:false, bairros:false }, cadastro:'rascunho', seq:1 };
   }
@@ -1382,8 +1399,19 @@ Fretes e mudanças;Sérgio Matos;Carreto;Eletrodomésticos|Material de construç
       onbNext: () => ultimo ? this.setState({ screen:dest, visto:true }) : this.setState({ onb: st.onb + 1 }),
       onbSkip: set({ screen:dest, visto:true }),
       confCod: () => this.setState({ screen: st.visto ? dest : 'onb', onb:0 }),
-      reenviar: () => this.flash('Novo código enviado por SMS.'),
-      esqueci: () => this.flash('Enviamos um código por SMS para redefinir a senha.'),
+      reenviar: () => this.flash('Novo código enviado por SMS para ' + (st.celular || '(14) 99999-0000') + '.'),
+      esqueci: () => {
+        const { txt: c } = this.readInput('cel');
+        const celVal = c || st.celular || '(14) 99999-0000';
+        this.flash('Enviamos um código por SMS para ' + celVal + ' para redefinir a senha.');
+      },
+      onCel: (e) => this.draft(e, 'cel'),
+      onSen: (e) => this.draft(e, 'sen'),
+      onCod: (e) => this.draft(e, 'codinp'),
+      togSenha: () => this.setState({ verSenha: !st.verSenha }),
+      verSenhaTxt: st.verSenha ? 'Ocultar' : 'Mostrar',
+      senType: st.verSenha ? 'text' : 'password',
+      celularExib: st.celular || '(14) 99999-0000',
       menuItems, infoBlocks: (infoMap[st.infoKey] || infoMap.sobre).b,
       favList, semFavs: favList.length === 0, recs, semRec: recs.length === 0,
       selFav: () => comH(sel).favGo(), selFavTxt: comH(sel).favTxt,
@@ -1400,7 +1428,26 @@ Fretes e mudanças;Sérgio Matos;Carreto;Eletrodomésticos|Material de construç
       s_splash: sc === 'splash', s_login: sc === 'login', s_home: sc === 'home', s_lista: sc === 'lista', s_perfil: sc === 'perfil', s_pedido: sc === 'pedido', s_meus: sc === 'meus', s_orc: sc === 'orc', s_chat: sc === 'chat', s_aval: sc === 'aval', s_phome: sc === 'phome', s_pcred: sc === 'pcred', s_pperfil: sc === 'pperfil',
       ...extras,
       roles, roleNome: pres ? 'prestador' : 'cliente', roleDica: pres ? 'Cadastro com verificação de documento. Primeiros meses grátis.' : 'Pedir orçamento é grátis para o cliente.',
-      entrar: () => st.aceite ? this.setState({ screen:'codigo', novo:false, notifs:[], unread:0 }) : this.flash('Marque o aceite dos termos para continuar.'), criar: () => st.aceite ? this.setState({ screen:'codigo', novo:true, notifs:[], unread:0 }) : this.flash('Marque o aceite dos termos para continuar.'),
+      entrar: () => {
+        const { txt: c } = this.readInput('cel');
+        const { txt: s } = this.readInput('sen');
+        const celVal = c || st.celular;
+        const senVal = s || st.senha;
+        if (!st.aceite) return this.flash('Marque o aceite dos termos para continuar.');
+        if (!celVal) return this.flash('Informe seu número de celular para entrar.');
+        if (!senVal) return this.flash('Digite sua senha para entrar.');
+        this.setState({ screen:'codigo', novo:false, notifs:[], unread:0, celular: celVal, senha: senVal });
+      },
+      criar: () => {
+        const { txt: c } = this.readInput('cel');
+        const { txt: s } = this.readInput('sen');
+        const celVal = c || st.celular;
+        const senVal = s || st.senha;
+        if (!st.aceite) return this.flash('Marque o aceite dos termos para continuar.');
+        if (!celVal) return this.flash('Informe seu número de celular para criar a conta.');
+        if (!senVal) return this.flash('Crie uma senha de acesso.');
+        this.setState({ screen:'codigo', novo:true, notifs:[], unread:0, celular: celVal, senha: senVal });
+      },
       buscaTxt: st.q, onBusca: (e) => this.typed(e, 'q', 'buscainp'), buscando, res, nRes: res.length, cats, filtros, lista, sel, catAtual,
       selPedir: set({ screen:'pedido', cat:sel.cat, para:sel.nome }), selChat: chatFn(sel.nome, 'perfil'),
       paraTxt: st.para ? 'Para: ' + st.para : 'Para: até 3 profissionais da categoria',
