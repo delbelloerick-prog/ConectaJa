@@ -1044,7 +1044,7 @@ Toque para entrar
 <div style="position:fixed;inset:0;background:rgba(15,42,39,.45);display:flex;flex-direction:column;justify-content:flex-end;align-items:center;z-index:9999">
 <div style="background:#fff;border-radius:24px 24px 0 0;height:78%;width:100%;max-width:720px;display:flex;flex-direction:column;overflow:hidden">
 <div style="background:#115E59;color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center">
-<span style="display:flex;flex-direction:column"><b style="font-size:16px">Assistente ConectaJa</b><span style="font-size:12px;opacity:.85">Tire dúvidas sobre o app</span></span>
+<span style="display:flex;flex-direction:column"><b style="font-size:16px">Assistente ConectaJa</b><span style="font-size:12px;opacity:.85">Pergunte qualquer coisa • Inteligência Artificial</span></span>
 <button sc-camel-on-click="{{fecharAjuda}}" aria-label="Fechar" style="width:36px;height:36px;border-radius:12px;background:rgba(255,255,255,.18);color:#fff;display:flex;align-items:center;justify-content:center">
 <svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
 </div>
@@ -1059,7 +1059,7 @@ Toque para entrar
 <sc-for list="{{perguntas}}" as="q" hint-placeholder-count="4"><button class="chipb" style="flex:none;white-space:nowrap" sc-camel-on-mouse-down="{{q.keep}}" sc-camel-on-click="{{q.go}}">{{q.t}}</button></sc-for>
 </div>
 <div style="display:flex;gap:8px;padding:8px 12px 14px">
-<input id="ajudainp" class="in" aria-label="Digite sua dúvida" placeholder="Digite sua dúvida" autocomplete="off" enterkeyhint="send" sc-camel-on-input="{{onAtxt}}" sc-camel-on-key-down="{{ajudaKey}}" sc-camel-on-focus="{{ajudaFocus}}">
+<input id="ajudainp" class="in" aria-label="Pergunte qualquer coisa" placeholder="Pergunte qualquer coisa..." autocomplete="off" enterkeyhint="send" sc-camel-on-input="{{onAtxt}}" sc-camel-on-key-down="{{ajudaKey}}" sc-camel-on-focus="{{ajudaFocus}}">
 <button sc-camel-on-mouse-down="{{keep}}" sc-camel-on-click="{{enviarAjuda}}" aria-label="Enviar" style="width:48px;flex:none;border-radius:12px;background:#F59E0B;color:#1F2937;display:flex;align-items:center;justify-content:center">
 <svg width="20" height="20" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"></path></svg></button>
 </div>
@@ -1075,7 +1075,7 @@ class Component extends DCLogic {
   constructor(props) {
     super(props);
     this.state = { screen:'splash', role:'cliente', cat:'Reformas e construção', para:null, selNome:null, sort:'todos', q:'', pedidos:[], ativo:null, nota:0, chat:[], chatNome:'', ajuda:false, celular:'', senha:'', verSenha:false,
-      amsgs:[{ de:'bot', t:'Oi! Sou o assistente do ConectaJa. Toque em uma pergunta ou escreva sua dúvida.' }], atxt:'', ctxt:'', typing:false, atyp:false, toast:'', aceite:false, onb:0, visto:false, novo:false, favs:{}, cats:{}, bairros:{}, raio:5, faixa:'', infoKey:'sobre', offline:false, grande:false, avCli:0, respondido:false, avisos:{}, notifs:[], unread:0, extrato:[{ t:'Bônus de boas-vindas', v:'+10' }], fotos:0, denunc:{}, admAn:3, admDen:2, admRe:1, assunto:'Pagamento', protocolo:'', creditos:10, abertos:{}, env:{}, pix:null, pixMsg:'',
+      amsgs:[{ de:'bot', t:'Oi! Sou a assistente de IA do ConectaJa. Pode me fazer qualquer pergunta sobre o app, serviços em Tupã ou qualquer outro assunto!' }], atxt:'', ctxt:'', typing:false, atyp:false, toast:'', aceite:false, onb:0, visto:false, novo:false, favs:{}, cats:{}, bairros:{}, raio:5, faixa:'', infoKey:'sobre', offline:false, grande:false, avCli:0, respondido:false, avisos:{}, notifs:[], unread:0, extrato:[{ t:'Bônus de boas-vindas', v:'+10' }], fotos:0, denunc:{}, admAn:3, admDen:2, admRe:1, assunto:'Pagamento', protocolo:'', creditos:10, abertos:{}, env:{}, pix:null, pixMsg:'',
       etapas:{ doc:false, selfie:false, cats:false, bairros:false }, cadastro:'rascunho', seq:1 };
   }
   nz(t) { return (t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
@@ -1113,7 +1113,10 @@ class Component extends DCLogic {
     ];
     this._kb = kb;
     for (const [keys, ans] of kb) { if (keys.some((k) => t.includes(k))) return ans; }
-    return 'Posso explicar: como funciona, como pedir um serviço, custos, créditos, verificação, avaliações e cadastro de prestador. Toque em uma das perguntas abaixo.';
+    if (/^(oi|ola|bom dia|boa tarde|boa noite|e ai|opa)/.test(t)) {
+      return 'Olá! Como posso ajudar você hoje? Pode me perguntar sobre serviços em Tupã ou qualquer outro assunto que você desejar!';
+    }
+    return 'Entendido! Estou aqui para ajudar com qualquer dúvida sobre serviços em Tupã ou qualquer outro tema que você precisar.';
   }
   root(e) { const n = e && (e.currentTarget || e.target); if (n && n.getRootNode) this._root = n.getRootNode(); }
   getChat() { return this._chat || this.state.chat; }
@@ -1161,11 +1164,26 @@ class Component extends DCLogic {
   async sampleText(input) {
     try {
       const c = window.claude;
-      const sample = c && c.use ? await c.use('sample') : null;
-      if (!sample) return null;
-      const r = await sample(input, { cache:false, modelTier:'quick' });
-      return r && r.text ? r.text.trim() : null;
-    } catch (e) { return null; }
+      if (c && c.use) {
+        const sample = await c.use('sample');
+        if (sample) {
+          const r = await sample(input, { cache:false, modelTier:'quick' });
+          if (r && r.text) return r.text.trim();
+        }
+      }
+    } catch (e) {}
+    try {
+      const ctrl = new AbortController();
+      const tid = setTimeout(() => ctrl.abort(), 12000);
+      const url = 'https://text.pollinations.ai/' + encodeURIComponent(input);
+      const res = await fetch(url, { signal: ctrl.signal });
+      clearTimeout(tid);
+      if (res.ok) {
+        const text = await res.text();
+        if (text && text.trim()) return text.trim();
+      }
+    } catch (err) {}
+    return null;
   }
   async ask(q, e) {
     this.root(e);
@@ -1180,7 +1198,7 @@ class Component extends DCLogic {
     this.setState({ amsgs:cur, atyp:true });
     this.toEnd('aend'); this.restore('ajudainp', this._wantA);
     const kbTxt = (this._kb || []).map(([k, a]) => a).join('\n- ');
-    const input = 'Você é o assistente de ajuda do app ConectaJa, um marketplace de serviços da cidade de Tupã (SP), no estilo de apps como GetNinjas. Explique como o app funciona usando SOMENTE as informações abaixo. Se a pergunta fugir do app ou você não souber, diga isso com gentileza e sugira o suporte. Responda em português do Brasil, em até 4 frases curtas, sem emojis e sem formatação especial.\n\nInformações do app:\n- ' + kbTxt + '\n\nContexto: o usuário está como ' + this.state.role + ' na tela "' + this.state.screen + '".\n\nConversa recente:\n' + hist + '\n\nPergunta atual: ' + q;
+    const input = 'Você é a Assistente Inteligente do app ConectaJa (marketplace de serviços de Tupã, SP) e também uma IA geral muito prestativa. Responda em português do Brasil de forma clara, amigável, precisa e prestativa. Você tem total liberdade para responder QUALQUER tipo de pergunta (conhecimentos gerais, dicas do dia a dia, cálculos, explicações, ideias, curiosidades, etc.). Se a pergunta for sobre o aplicativo ConectaJa ou serviços em Tupã, utilize as informações abaixo:\n' + kbTxt + '\n\nConversa recente:\n' + hist + '\n\nPergunta do usuário: ' + q;
     const ai = await this.sampleText(input);
     if (!ai) await new Promise((r) => setTimeout(r, 600));
     const nxt = [...this._am, { de:'bot', t: ai || base }];
